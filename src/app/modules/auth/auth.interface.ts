@@ -4,10 +4,15 @@ export type IUser = {
   middleName: string;
   lastName: string;
   email: string;
-  password: string;
+  password?: string;
   avatar: string;
   role: string;
   gender: string;
   contactNo: string;
   presentAddress: string;
+};
+
+export type ILoginUser = {
+  email: string;
+  password: string;
 };

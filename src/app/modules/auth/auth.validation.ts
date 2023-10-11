@@ -20,9 +20,7 @@ const create = z.object({
     avatar: z.string({
       required_error: 'Profile Image is required',
     }),
-    role: z.enum([...roles] as [string, ...string[]], {
-      required_error: 'Role is required',
-    }),
+    role: z.enum([...roles] as [string, ...string[]]).optional(),
     gender: z.string({
       required_error: 'Gender is required',
     }),
