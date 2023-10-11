@@ -54,10 +54,10 @@ const loginUser = async (payload: ILoginUser) => {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Password is incorrect');
   }
 
-  const { id: userId, role } = isUserExist;
+  const { id: userId, email, role } = isUserExist;
 
   const token = jwtHelpers.createToken(
-    { userId, role },
+    { userId, email, role },
     config.jwt.secret as Secret,
     config.jwt.expires_in as string
   );

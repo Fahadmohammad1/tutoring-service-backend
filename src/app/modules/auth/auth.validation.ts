@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const roles = ['user', 'admin'];
+const roles = ['user', 'admin', 'student', 'teacher'];
 
 const create = z.object({
   body: z.object({
@@ -17,18 +17,8 @@ const create = z.object({
     password: z.string({
       required_error: 'Password is required',
     }),
-    avatar: z.string({
-      required_error: 'Profile Image is required',
-    }),
-    role: z.enum([...roles] as [string, ...string[]]).optional(),
-    gender: z.string({
-      required_error: 'Gender is required',
-    }),
-    contactNo: z.string({
-      required_error: 'Contact No is required',
-    }),
-    presentAddress: z.string({
-      required_error: 'Address is required',
+    role: z.enum([...roles] as [string, ...string[]], {
+      required_error: 'Role is required',
     }),
   }),
 });

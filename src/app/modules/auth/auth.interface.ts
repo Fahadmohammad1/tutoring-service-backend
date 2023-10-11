@@ -5,11 +5,7 @@ export type IUser = {
   lastName: string;
   email: string;
   password?: string;
-  avatar: string;
   role: string;
-  gender: string;
-  contactNo: string;
-  presentAddress: string;
 };
 
 export type ILoginUser = {

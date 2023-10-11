@@ -11,15 +11,38 @@ datasource db {
 }
 
 model User {
-  id             String @id @default(uuid())
+  id             String           @id @default(uuid())
   firstName      String
   middleName     String
   lastName       String
-  email          String @unique
+  email          String           @unique
   password       String
-  avatar         String
-  role           String @default("user")
-  gender         String
-  contactNo      String
-  presentAddress String
+  role           String
+  StudentProfile StudentProfile[]
+  TeacherProfile TeacherProfile[]
+}
+
+model StudentProfile {
+  id              String @id() @default(uuid())
+  userId          String
+  user            User   @relation(fields: [userId], references: [id])
+  gender          String
+  contactNo       String
+  presentAddress  String
+  avatar          String
+  institutionName String
+  class           String
+}
+
+model TeacherProfile {
+  id              String @id() @default(uuid())
+  userId          String
+  user            User   @relation(fields: [userId], references: [id])
+  gender          String
+  contactNo       String
+  presentAddress  String
+  avatar          String
+  institutionName String
+  designation     String
+  degree          String
 }
