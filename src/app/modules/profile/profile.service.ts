@@ -22,9 +22,6 @@ const createStudentProfile = async (
     where: {
       id: userId,
     },
-    include: {
-      StudentProfile: true,
-    },
   });
 
   if (!findUser) {
@@ -60,9 +57,6 @@ const createGuardianProfile = async (
     where: {
       id: userId,
     },
-    include: {
-      StudentProfile: true,
-    },
   });
 
   if (!findUser) {
@@ -74,7 +68,7 @@ const createGuardianProfile = async (
   // setting user fullname for profile
   guardianData.fullName = firstName + ' ' + middleName + ' ' + lastName;
 
-  const result = prisma.guardianProfile.create({
+  const result = await prisma.guardianProfile.create({
     data: guardianData,
   });
 
@@ -98,9 +92,6 @@ const createTeacherProfile = async (
     where: {
       id: userId,
     },
-    include: {
-      StudentProfile: true,
-    },
   });
 
   if (!findUser) {
@@ -112,7 +103,7 @@ const createTeacherProfile = async (
   // setting user fullname for profile
   teacherData.fullName = firstName + ' ' + middleName + ' ' + lastName;
 
-  const result = prisma.teacherProfile.create({
+  const result = await prisma.teacherProfile.create({
     data: teacherData,
   });
 
