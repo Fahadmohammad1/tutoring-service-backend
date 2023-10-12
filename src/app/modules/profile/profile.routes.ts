@@ -32,7 +32,7 @@ router.post(
 
 router.patch(
   '/update-profile',
-  auth(ENUM_USER_ROLE.STUDENT, ENUM_USER_ROLE.TEACHER),
+  auth(ENUM_USER_ROLE.STUDENT, ENUM_USER_ROLE.TEACHER, ENUM_USER_ROLE.PARENT),
   validateRequest(ProfileValidation.updateProfile),
   ProfileController.updateProfile
 );

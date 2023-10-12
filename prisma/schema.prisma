@@ -20,6 +20,7 @@ model User {
   role           String
   StudentProfile StudentProfile[]
   TeacherProfile TeacherProfile[]
+  ParentProfile  ParentProfile[]
 }
 
 model StudentProfile {
@@ -47,4 +48,23 @@ model TeacherProfile {
   degree             String
   experienceYear     String   @default("0")
   subjectOfExpertise String[]
+}
+
+model ParentProfile {
+  id             String @id() @default(uuid())
+  userId         String
+  user           User   @relation(fields: [userId], references: [id])
+  gender         String
+  contactNo      String
+  presentAddress String
+  avatar         String
+  address        String
+  occupation     String
+}
+
+model Service {
+  id          String @id @default(uuid())
+  title       String
+  description String
+  category    String
 }

@@ -1,4 +1,4 @@
-import { StudentProfile, TeacherProfile } from '@prisma/client';
+import { ParentProfile, StudentProfile, TeacherProfile } from '@prisma/client';
 import { JwtPayload } from 'jsonwebtoken';
 import prisma from '../../../shared/prisma';
 import { IUser } from '../auth/auth.interface';
@@ -18,6 +18,26 @@ const createStudentProfile = async (
     },
     data: {
       role: 'student',
+    },
+  });
+
+  return result;
+};
+
+const createParentProfile = async (
+  parentData: ParentProfile,
+  userId: string
+): Promise<ParentProfile | null> => {
+  const result = prisma.parentProfile.create({
+    data: parentData,
+  });
+
+  await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      role: 'parent',
     },
   });
 
@@ -58,6 +78,17 @@ const getSingleProfile = async (user: JwtPayload): Promise<IUser | null> => {
     });
   }
 
+  if (user.role === 'parent') {
+    result = await prisma.user.findUnique({
+      where: {
+        id: user.userId,
+      },
+      include: {
+        ParentProfile: true,
+      },
+    });
+  }
+
   if (user.role === 'teacher') {
     result = await prisma.user.findUnique({
       where: {
@@ -81,6 +112,7 @@ const updateProfile = async (
     },
     include: {
       StudentProfile: true,
+      ParentProfile: true,
       TeacherProfile: true,
     },
   });
@@ -96,10 +128,19 @@ const updateProfile = async (
     });
   }
 
+  if (findUser?.role === 'parent') {
+    result = await prisma.parentProfile.update({
+      where: {
+        id: findUser?.ParentProfile[0].id,
+      },
+      data: payload,
+    });
+  }
+
   if (user.role === 'teacher') {
     result = await prisma.teacherProfile.update({
       where: {
-        id: user.userId,
+        id: findUser?.TeacherProfile[0].id,
       },
       data: payload,
     });
@@ -110,6 +151,7 @@ const updateProfile = async (
 
 export const ProfileService = {
   createStudentProfile,
+  createParentProfile,
   createTeacherProfile,
   getSingleProfile,
   updateProfile,
