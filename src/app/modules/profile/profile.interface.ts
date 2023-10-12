@@ -21,3 +21,13 @@ export type ITeacherProfile = {
   experienceYear?: string;
   SubjectOfExpertise?: string[];
 };
+
+export type IGuardianProfile = {
+  id: string;
+  userId: string;
+  gender: string;
+  contactNo: string;
+  presentAddress: string;
+  avatar: string;
+  occupation?: string;
+};
