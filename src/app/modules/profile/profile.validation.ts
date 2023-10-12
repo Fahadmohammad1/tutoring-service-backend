@@ -51,88 +51,26 @@ const createTeacherProfile = z.object({
   }),
 });
 
-const updateStudentProfile = z.object({
+const updateProfile = z.object({
   body: z
     .object({
-      userId: z
-        .string({
-          required_error: 'UserId is required',
-        })
-        .optional(),
-      gender: z
-        .string({
-          required_error: 'Gender is required',
-        })
-        .optional(),
-      contactNo: z
-        .string({
-          required_error: 'Contact Number is required',
-        })
-        .optional(),
-      presentAddress: z
-        .string({
-          required_error: 'Present Address is required',
-        })
-        .optional(),
+      userId: z.string().optional(),
+      gender: z.string().optional(),
+      contactNo: z.string().optional(),
+      presentAddress: z.string().optional(),
       avatar: z.string().optional(),
-      institutionName: z
-        .string({
-          required_error: 'Institution Name is required',
-        })
-        .optional(),
-      class: z
-        .string({
-          required_error: 'Class is required',
-        })
-        .optional(),
-    })
-    .optional(),
-});
-
-const updateTeacherProfile = z.object({
-  body: z
-    .object({
-      userId: z
-        .string({
-          required_error: 'UserId is required',
-        })
-        .optional(),
-      gender: z
-        .string({
-          required_error: 'Gender is required',
-        })
-        .optional(),
-      contactNo: z
-        .string({
-          required_error: 'Contact Number is required',
-        })
-        .optional(),
-      presentAddress: z
-        .string({
-          required_error: 'Present Address is required',
-        })
-        .optional(),
-      avatar: z.string().optional(),
-      institutionName: z
-        .string({
-          required_error: 'Institution Name is required',
-        })
-        .optional(),
+      institutionName: z.string().optional(),
+      class: z.string().optional(),
       designation: z.string().optional(),
       degree: z.string().optional(),
-      experienceYear: z
-        .string({
-          required_error: 'Experience year is required',
-        })
-        .optional(),
+      experienceYear: z.string().optional(),
       subjectOfExpertise: z.array(z.string()).optional(),
     })
-    .optional(),
+    .nonstrict(),
 });
 
 export const ProfileValidation = {
   createStudentProfile,
   createTeacherProfile,
-  updateStudentProfile,
-  updateTeacherProfile,
+  updateProfile,
 };
