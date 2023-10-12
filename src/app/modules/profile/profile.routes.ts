@@ -11,4 +11,10 @@ router.post(
   ProfileController.createStudentProfile
 );
 
+router.post(
+  '/create-teacherProfile/:id',
+  validateRequest(ProfileValidation.createTeacherProfile),
+  ProfileController.createTeacherProfile
+);
+
 export const ProfileRoutes = router;

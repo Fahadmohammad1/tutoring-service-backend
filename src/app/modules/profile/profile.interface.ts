@@ -18,4 +18,6 @@ export type ITeacherProfile = {
   avatar: string;
   institutionName?: string;
   designation?: string;
+  experienceYear?: string;
+  SubjectOfExpertise?: string[];
 };

@@ -15,6 +15,18 @@ const createStudentProfile = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const createTeacherProfile = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await ProfileService.createTeacherProfile(req.body, id);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Profile created successfully',
+    data: result,
+  });
+});
+
 export const ProfileController = {
   createStudentProfile,
+  createTeacherProfile,
 };

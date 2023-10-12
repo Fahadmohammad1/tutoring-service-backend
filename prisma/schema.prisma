@@ -35,14 +35,16 @@ model StudentProfile {
 }
 
 model TeacherProfile {
-  id              String @id() @default(uuid())
-  userId          String
-  user            User   @relation(fields: [userId], references: [id])
-  gender          String
-  contactNo       String
-  presentAddress  String
-  avatar          String
-  institutionName String
-  designation     String
-  degree          String
+  id                 String   @id() @default(uuid())
+  userId             String
+  user               User     @relation(fields: [userId], references: [id])
+  gender             String
+  contactNo          String
+  presentAddress     String
+  avatar             String
+  institutionName    String
+  designation        String
+  degree             String
+  experienceYear     String   @default("0")
+  subjectOfExpertise String[]
 }
