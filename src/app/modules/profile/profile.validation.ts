@@ -24,6 +24,25 @@ const createStudentProfile = z.object({
   }),
 });
 
+const createGuardianProfile = z.object({
+  body: z.object({
+    userId: z.string({
+      required_error: 'UserId is required',
+    }),
+    gender: z.string({
+      required_error: 'Gender is required',
+    }),
+    contactNo: z.string({
+      required_error: 'Contact Number is required',
+    }),
+    presentAddress: z.string({
+      required_error: 'Present Address is required',
+    }),
+    avatar: z.string().optional(),
+    occupation: z.string().optional(),
+  }),
+});
+
 const createTeacherProfile = z.object({
   body: z.object({
     userId: z.string({
@@ -71,6 +90,7 @@ const updateProfile = z.object({
 
 export const ProfileValidation = {
   createStudentProfile,
+  createGuardianProfile,
   createTeacherProfile,
   updateProfile,
 };

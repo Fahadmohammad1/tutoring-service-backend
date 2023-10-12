@@ -5,9 +5,6 @@ const createService = z.object({
     title: z.string({
       required_error: 'Title is required',
     }),
-    author: z.string({
-      required_error: 'Author Name is required',
-    }),
     thumbnail: z.string({
       required_error: 'Thumbnail image is required',
     }),
@@ -17,6 +14,9 @@ const createService = z.object({
     rating: z.array(z.string()).optional(),
     category: z.string({
       required_error: 'Category is required',
+    }),
+    time: z.string({
+      required_error: 'Time is required',
     }),
     price: z.string().optional(),
   }),

@@ -16,16 +16,18 @@ const createStudentProfile = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const createParentProfile = catchAsync(async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const result = await ProfileService.createParentProfile(req.body, id);
-  sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'Profile created successfully',
-    data: result,
-  });
-});
+const createGuardianProfile = catchAsync(
+  async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const result = await ProfileService.createGuardianProfile(req.body, id);
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: 'Profile created successfully',
+      data: result,
+    });
+  }
+);
 
 const createTeacherProfile = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -62,7 +64,7 @@ const updateProfile = catchAsync(async (req: Request, res: Response) => {
 
 export const ProfileController = {
   createStudentProfile,
-  createParentProfile,
+  createGuardianProfile,
   createTeacherProfile,
   getSingleProfile,
   updateProfile,

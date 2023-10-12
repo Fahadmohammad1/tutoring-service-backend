@@ -1,11 +1,14 @@
 export type IService = {
   id: string;
+  userId: string;
   thumbnail: string;
   title: string;
-  author: string;
+  authorName: string;
+  authorEmail: string;
   description: string;
-  rating: string;
+  rating: string[];
   category: string;
+  time: string;
   price: string;
-  badge: string[];
+  badge?: string[];
 };

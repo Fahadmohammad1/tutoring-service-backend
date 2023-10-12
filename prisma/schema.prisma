@@ -21,12 +21,14 @@ model User {
   StudentProfile  StudentProfile[]
   TeacherProfile  TeacherProfile[]
   GuardianProfile GuardianProfile[]
+  Service         Service[]
 }
 
 model StudentProfile {
   id              String @id() @default(uuid())
   userId          String
   user            User   @relation(fields: [userId], references: [id])
+  fullName        String
   gender          String
   contactNo       String
   presentAddress  String
@@ -39,6 +41,7 @@ model TeacherProfile {
   id                 String   @id() @default(uuid())
   userId             String
   user               User     @relation(fields: [userId], references: [id])
+  fullName           String
   gender             String
   contactNo          String
   presentAddress     String
@@ -54,6 +57,7 @@ model GuardianProfile {
   id             String @id() @default(uuid())
   userId         String
   user           User   @relation(fields: [userId], references: [id])
+  fullName       String
   gender         String
   contactNo      String
   presentAddress String
@@ -64,12 +68,16 @@ model GuardianProfile {
 
 model Service {
   id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
   thumbnail   String
   title       String
-  author      String
+  authorName  String
+  authorEmail String
   description String
   rating      String[] @default(["0"])
   category    String
   price       String   @default("0")
-  badge       String[]
+  time        String
+  badge       String[] @default([])
 }

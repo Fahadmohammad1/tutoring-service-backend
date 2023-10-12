@@ -3,7 +3,9 @@ import {
   StudentProfile,
   TeacherProfile,
 } from '@prisma/client';
+import httpStatus from 'http-status';
 import { JwtPayload } from 'jsonwebtoken';
+import ApiError from '../../../errors/ApiError';
 import prisma from '../../../shared/prisma';
 import { IUser } from '../auth/auth.interface';
 import {
@@ -16,7 +18,25 @@ const createStudentProfile = async (
   studentData: StudentProfile,
   userId: string
 ): Promise<IStudentProfile | null> => {
-  const result = prisma.studentProfile.create({
+  const findUser = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    include: {
+      StudentProfile: true,
+    },
+  });
+
+  if (!findUser) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'User does not exist');
+  }
+
+  const { firstName, middleName, lastName } = findUser;
+
+  // setting user fullname for profile
+  studentData.fullName = firstName + ' ' + middleName + ' ' + lastName;
+
+  const result = await prisma.studentProfile.create({
     data: studentData,
   });
 
@@ -33,11 +53,29 @@ const createStudentProfile = async (
 };
 
 const createGuardianProfile = async (
-  parentData: GuardianProfile,
+  guardianData: GuardianProfile,
   userId: string
 ): Promise<IGuardianProfile | null> => {
+  const findUser = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    include: {
+      StudentProfile: true,
+    },
+  });
+
+  if (!findUser) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'User does not exist');
+  }
+
+  const { firstName, middleName, lastName } = findUser;
+
+  // setting user fullname for profile
+  guardianData.fullName = firstName + ' ' + middleName + ' ' + lastName;
+
   const result = prisma.guardianProfile.create({
-    data: parentData,
+    data: guardianData,
   });
 
   await prisma.user.update({
@@ -56,6 +94,24 @@ const createTeacherProfile = async (
   teacherData: TeacherProfile,
   userId: string
 ): Promise<ITeacherProfile | null> => {
+  const findUser = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    include: {
+      StudentProfile: true,
+    },
+  });
+
+  if (!findUser) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'User does not exist');
+  }
+
+  const { firstName, middleName, lastName } = findUser;
+
+  // setting user fullname for profile
+  teacherData.fullName = firstName + ' ' + middleName + ' ' + lastName;
+
   const result = prisma.teacherProfile.create({
     data: teacherData,
   });
