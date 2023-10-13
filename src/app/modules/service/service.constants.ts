@@ -4,6 +4,8 @@ export const serviceFilterableFields: string[] = [
   'authorName',
   'category',
   'location',
+  'minPrice',
+  'maxPrice',
 ];
 
 export const serviceSearchableFields: string[] = [

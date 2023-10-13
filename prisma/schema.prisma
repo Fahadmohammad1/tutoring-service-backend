@@ -84,7 +84,7 @@ model Service {
   description String
   rating      String[] @default(["0"])
   category    String
-  price       String   @default("0")
+  price       Float    @default(0)
   time        String
   badge       String[] @default([])
   createdAt   DateTime @default(now())

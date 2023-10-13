@@ -9,7 +9,7 @@ export type IService = {
   rating: string[];
   category: string;
   time: string;
-  price: string;
+  price?: number;
   badge?: string[];
 };
 
@@ -19,4 +19,6 @@ export type IServiceFilter = {
   authorName?: string | undefined;
   category?: string | undefined;
   location?: string | undefined;
+  minPrice?: number | undefined;
+  maxPrice?: number | undefined;
 };

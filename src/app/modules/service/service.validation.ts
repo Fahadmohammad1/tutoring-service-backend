@@ -21,7 +21,7 @@ const createService = z.object({
     location: z.string({
       required_error: 'Location is required',
     }),
-    price: z.string().optional(),
+    price: z.number().optional(),
   }),
 });
 
