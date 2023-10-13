@@ -7,6 +7,9 @@ import { ServiceValidation } from './service.validation';
 
 const router = express.Router();
 
+router.get('/:id', ServiceController.getSingleService);
+router.get('/', ServiceController.getAllServices);
+
 router.post(
   '/create-service',
   auth(ENUM_USER_ROLE.TEACHER),

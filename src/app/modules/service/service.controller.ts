@@ -2,7 +2,9 @@ import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { JwtPayload } from 'jsonwebtoken';
 import catchAsync from '../../../shared/catchAsync';
+import pick from '../../../shared/pick';
 import sendResponse from '../../../shared/sendResponse';
+import { serviceFilterableFields } from './service.constants';
 import { ServicesOfService } from './service.service';
 
 const createService = catchAsync(async (req: Request, res: Response) => {
@@ -16,6 +18,32 @@ const createService = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getAllServices = catchAsync(async (req: Request, res: Response) => {
+  const filters = pick(req.query, serviceFilterableFields);
+  const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
+
+  const result = await ServicesOfService.getAllServices(filters, options);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Service fetched successfully',
+    data: result,
+  });
+});
+
+const getSingleService = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await ServicesOfService.getSingleService(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'service fetched successfully',
+    data: result,
+  });
+});
+
 export const ServiceController = {
   createService,
+  getAllServices,
+  getSingleService,
 };

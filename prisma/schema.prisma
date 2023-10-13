@@ -22,12 +22,14 @@ model User {
   TeacherProfile  TeacherProfile[]
   GuardianProfile GuardianProfile[]
   Service         Service[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
 }
 
 model StudentProfile {
-  id              String @id() @default(uuid())
+  id              String   @id() @default(uuid())
   userId          String
-  user            User   @relation(fields: [userId], references: [id])
+  user            User     @relation(fields: [userId], references: [id])
   fullName        String
   gender          String
   contactNo       String
@@ -35,6 +37,8 @@ model StudentProfile {
   avatar          String
   institutionName String
   class           String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model TeacherProfile {
@@ -51,6 +55,8 @@ model TeacherProfile {
   degree             String
   experienceYear     String   @default("0")
   subjectOfExpertise String[]
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 }
 
 model GuardianProfile {
@@ -71,7 +77,8 @@ model Service {
   userId      String
   user        User     @relation(fields: [userId], references: [id])
   thumbnail   String
-  title       String
+  name        String
+  location    String
   authorName  String
   authorEmail String
   description String
@@ -80,4 +87,6 @@ model Service {
   price       String   @default("0")
   time        String
   badge       String[] @default([])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

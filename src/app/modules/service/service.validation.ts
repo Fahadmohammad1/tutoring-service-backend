@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 const createService = z.object({
   body: z.object({
-    title: z.string({
+    name: z.string({
       required_error: 'Title is required',
     }),
     thumbnail: z.string({
@@ -17,6 +17,9 @@ const createService = z.object({
     }),
     time: z.string({
       required_error: 'Time is required',
+    }),
+    location: z.string({
+      required_error: 'Location is required',
     }),
     price: z.string().optional(),
   }),

@@ -2,7 +2,7 @@ export type IService = {
   id: string;
   userId: string;
   thumbnail: string;
-  title: string;
+  name: string;
   authorName: string;
   authorEmail: string;
   description: string;
@@ -11,4 +11,12 @@ export type IService = {
   time: string;
   price: string;
   badge?: string[];
+};
+
+export type IServiceFilter = {
+  search?: string | undefined;
+  name?: string | undefined;
+  authorName?: string | undefined;
+  category?: string | undefined;
+  location?: string | undefined;
 };
