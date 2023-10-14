@@ -25,6 +25,20 @@ const createService = z.object({
   }),
 });
 
+const updateSerive = z.object({
+  body: z.object({
+    name: z.string().optional(),
+    thumbnail: z.string().optional(),
+    description: z.string().optional(),
+    rating: z.array(z.string()).optional(),
+    category: z.string().optional(),
+    time: z.string().optional(),
+    location: z.string().optional(),
+    price: z.number().optional(),
+  }),
+});
+
 export const ServiceValidation = {
   createService,
+  updateSerive,
 };

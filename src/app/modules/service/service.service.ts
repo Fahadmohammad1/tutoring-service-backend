@@ -118,8 +118,62 @@ const getSingleService = async (id: string): Promise<Service | null> => {
   return result;
 };
 
+const updateService = async (
+  id: string,
+  payload: Partial<IService>,
+  user: JwtPayload
+): Promise<Service | null> => {
+  const findService = await prisma.service.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (
+    user.email !== findService?.authorEmail &&
+    user.userId !== findService?.userId
+  ) {
+    throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden Access');
+  }
+
+  const result = await prisma.service.update({
+    where: {
+      id,
+    },
+    data: payload,
+  });
+  return result;
+};
+
+const deleteService = async (
+  id: string,
+  user: JwtPayload
+): Promise<Service | null> => {
+  const findService = await prisma.service.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (
+    user.email !== findService?.authorEmail &&
+    user.userId !== findService?.userId
+  ) {
+    throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden Access');
+  }
+
+  const result = await prisma.service.delete({
+    where: {
+      id,
+    },
+  });
+  return result;
+};
+
 export const ServicesOfService = {
   createService,
   getAllServices,
   getSingleService,
+  updateService,
+  deleteService,
 };

@@ -42,8 +42,34 @@ const getSingleService = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const updateService = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const user = req.user as JwtPayload;
+  const result = await ServicesOfService.updateService(id, req.body, user);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'service updated successfully',
+    data: result,
+  });
+});
+
+const deleteService = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const user = req.user as JwtPayload;
+  const result = await ServicesOfService.deleteService(id, user);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'service deleted successfully',
+    data: result,
+  });
+});
+
 export const ServiceController = {
   createService,
   getAllServices,
   getSingleService,
+  updateService,
+  deleteService,
 };
