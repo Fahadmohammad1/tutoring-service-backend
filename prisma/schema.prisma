@@ -97,12 +97,24 @@ model Service {
   Reviews     Reviews[]
 }
 
-model Booking {
-  id        String  @id @default(uuid())
-  userId    String
-  user      User    @relation(fields: [userId], references: [id])
+model TimeSlots {
+  id        String    @id @default(uuid())
   serviceId String
-  service   Service @relation(fields: [serviceId], references: [id])
+  service   Service   @relation(fields: [serviceId], references: [id])
+  date      String
+  startTime String
+  endTime   String
+  Booking   Booking[]
+}
+
+model Booking {
+  id         String    @id @default(uuid())
+  userId     String
+  user       User      @relation(fields: [userId], references: [id])
+  serviceId  String
+  service    Service   @relation(fields: [serviceId], references: [id])
+  timeSlotId String
+  timeSlots  TimeSlots @relation(fields: [timeSlotId], references: [id])
 }
 
 model Reviews {
@@ -112,15 +124,6 @@ model Reviews {
   serviceId String
   service   Service @relation(fields: [serviceId], references: [id])
   text      String
-}
-
-model TimeSlots {
-  id        String  @id @default(uuid())
-  serviceId String
-  service   Service @relation(fields: [serviceId], references: [id])
-  date      String
-  startTime String
-  endTime   String
 }
 
 enum serviceType {
