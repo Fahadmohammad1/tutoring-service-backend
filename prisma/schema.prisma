@@ -108,13 +108,14 @@ model TimeSlots {
 }
 
 model Booking {
-  id         String    @id @default(uuid())
+  id         String        @id @default(uuid())
+  status     bookingStatus @default(pending)
   userId     String
-  user       User      @relation(fields: [userId], references: [id])
+  user       User          @relation(fields: [userId], references: [id])
   serviceId  String
-  service    Service   @relation(fields: [serviceId], references: [id])
+  service    Service       @relation(fields: [serviceId], references: [id])
   timeSlotId String
-  timeSlots  TimeSlots @relation(fields: [timeSlotId], references: [id])
+  timeSlots  TimeSlots     @relation(fields: [timeSlotId], references: [id])
 }
 
 model Reviews {
@@ -129,4 +130,11 @@ model Reviews {
 enum serviceType {
   remote
   onsite
+}
+
+enum bookingStatus {
+  pending
+  cancelled
+  booked
+  completed
 }

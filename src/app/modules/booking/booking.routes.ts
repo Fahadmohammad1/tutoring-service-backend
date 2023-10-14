@@ -10,5 +10,15 @@ router.post(
   auth(ENUM_USER_ROLE.STUDENT, ENUM_USER_ROLE.GUARDIAN),
   BookingController.createBooking
 );
+router.patch(
+  '/update-booking/:id',
+  auth(ENUM_USER_ROLE.TEACHER),
+  BookingController.updateBooking
+);
+router.delete(
+  '/delete-booking/:id',
+  auth(ENUM_USER_ROLE.STUDENT, ENUM_USER_ROLE.GUARDIAN),
+  BookingController.cancelBooking
+);
 
 export const BookingRoutes = router;
