@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { serviceType } from './service.constants';
 
 const createService = z.object({
   body: z.object({
@@ -15,11 +16,26 @@ const createService = z.object({
     category: z.string({
       required_error: 'Category is required',
     }),
-    time: z.string({
+    duration: z.string({
       required_error: 'Time is required',
     }),
     location: z.string({
       required_error: 'Location is required',
+    }),
+    timeSlots: z
+      .array(
+        z.object({
+          startTime: z.string({
+            required_error: 'Start time is required',
+          }),
+          endTime: z.string({
+            required_error: 'End Time time is required',
+          }),
+        })
+      )
+      .optional(),
+    serviceType: z.enum([...serviceType] as [string, ...string[]], {
+      required_error: 'Service type is required',
     }),
     price: z.number().optional(),
   }),

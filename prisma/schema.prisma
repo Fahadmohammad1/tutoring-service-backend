@@ -24,6 +24,7 @@ model User {
   Service         Service[]
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
+  Booking         Booking[]
 }
 
 model StudentProfile {
@@ -73,20 +74,36 @@ model GuardianProfile {
 }
 
 model Service {
-  id          String   @id @default(uuid())
+  id          String      @id @default(uuid())
   userId      String
-  user        User     @relation(fields: [userId], references: [id])
+  user        User        @relation(fields: [userId], references: [id])
   thumbnail   String
   name        String
   location    String
   authorName  String
   authorEmail String
   description String
-  rating      String[] @default(["0"])
+  rating      String[]    @default(["0"])
   category    String
-  price       Float    @default(0)
-  time        String
-  badge       String[] @default([])
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  price       Float       @default(0)
+  duration    String
+  badge       String[]    @default([])
+  timeSlots   Json[]
+  serviceType serviceType
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  Booking     Booking[]
+}
+
+model Booking {
+  id        String  @id @default(uuid())
+  userId    String
+  user      User    @relation(fields: [userId], references: [id])
+  serviceId String
+  service   Service @relation(fields: [serviceId], references: [id])
+}
+
+enum serviceType {
+  remote
+  onsite
 }
