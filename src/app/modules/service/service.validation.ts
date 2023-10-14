@@ -13,6 +13,7 @@ const createService = z.object({
       required_error: 'Description is required',
     }),
     rating: z.array(z.string()).optional(),
+    reviews: z.array(z.object({})).optional(),
     category: z.string({
       required_error: 'Category is required',
     }),
@@ -29,11 +30,12 @@ const createService = z.object({
             required_error: 'Start time is required',
           }),
           endTime: z.string({
-            required_error: 'End Time time is required',
+            required_error: 'End time is required',
           }),
         })
       )
       .optional(),
+
     serviceType: z.enum([...serviceType] as [string, ...string[]], {
       required_error: 'Service type is required',
     }),

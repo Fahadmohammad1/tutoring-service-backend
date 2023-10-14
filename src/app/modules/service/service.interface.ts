@@ -1,14 +1,19 @@
+import { TimeSlots, serviceType } from '@prisma/client';
+
 export type IService = {
   id: string;
   userId: string;
   thumbnail: string;
   name: string;
+  location: string;
   authorName: string;
   authorEmail: string;
   description: string;
   rating: string[];
+  timeSlots: TimeSlots[];
   category: string;
-  time: string;
+  duration: string;
+  serviceType: serviceType;
   price?: number;
   badge?: string[];
 };

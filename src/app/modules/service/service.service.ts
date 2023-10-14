@@ -10,9 +10,10 @@ import { serviceSearchableFields } from './service.constants';
 import { IService, IServiceFilter } from './service.interface';
 
 const createService = async (
-  serviceData: Service,
+  data: IService,
   user: JwtPayload
-): Promise<IService | null> => {
+): Promise<Service | null> => {
+  const { timeSlots, ...serviceData } = data;
   const findService = await prisma.service.findMany({
     where: {
       name: serviceData.name,
@@ -42,13 +43,26 @@ const createService = async (
     }
   });
 
-  serviceData.userId = user.userId;
+  if (serviceData) serviceData.userId = user.userId;
   serviceData.authorName = findAuthor?.TeacherProfile[0].fullName;
   serviceData.authorEmail = findAuthor?.email;
 
-  const result = prisma.service.create({
+  const result = await prisma.service.create({
     data: serviceData,
   });
+
+  if (timeSlots) {
+    timeSlots.map(async slot => {
+      await prisma.timeSlots.create({
+        data: {
+          serviceId: result.id,
+          date: slot.date,
+          startTime: slot.startTime,
+          endTime: slot.endTime,
+        },
+      });
+    });
+  }
 
   return result;
 };
@@ -56,7 +70,7 @@ const createService = async (
 const getAllServices = async (
   filters: IServiceFilter,
   options: IPaginationOptions
-): Promise<IGenericResponse<IService[]>> => {
+): Promise<IGenericResponse<Service[]>> => {
   const { limit, page, skip } = paginationHelpers.calculatePagination(options);
   const { search, ...filterData } = filters;
 
