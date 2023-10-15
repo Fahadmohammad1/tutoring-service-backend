@@ -132,6 +132,8 @@ model Blog {
   title       String
   description String
   thumbnail   String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 enum serviceType {
