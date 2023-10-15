@@ -89,9 +89,25 @@ const getAllServices = async (
 
   if (Object.keys(filterData).length) {
     andConditions.push({
-      AND: Object.entries(filterData).map(([field, value]) => ({
-        [field]: value,
-      })),
+      AND: Object.entries(filterData).map(([field, value]) => {
+        if (field === 'minPrice') {
+          return {
+            price: {
+              gte: parseFloat(value as string),
+            },
+          };
+        }
+        if (field === 'maxPrice') {
+          return {
+            price: {
+              lte: parseFloat(value as string),
+            },
+          };
+        }
+        return {
+          [field]: value,
+        };
+      }),
     });
   }
 
