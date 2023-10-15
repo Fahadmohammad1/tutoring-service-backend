@@ -12,7 +12,6 @@ const createService = z.object({
     description: z.string({
       required_error: 'Description is required',
     }),
-    rating: z.array(z.string()).optional(),
     reviews: z.array(z.object({})).optional(),
     category: z.string({
       required_error: 'Category is required',
