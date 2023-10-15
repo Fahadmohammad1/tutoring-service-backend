@@ -15,6 +15,15 @@ const createBooking = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getAllBookings = catchAsync(async (req: Request, res: Response) => {
+  const result = await BookingService.getAllBookings();
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Bookings fetched Successfully',
+    data: result,
+  });
+});
 const getMyBookings = catchAsync(async (req: Request, res: Response) => {
   const { userId } = req.user as JwtPayload;
   const result = await BookingService.getMyBookings(userId);
@@ -39,6 +48,24 @@ const cancelBooking = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const updateBookingTimeSlot = catchAsync(
+  async (req: Request, res: Response) => {
+    const user = req.user as JwtPayload;
+    const { bookingId } = req.params;
+
+    const result = await BookingService.updateBookingTimeSlot(
+      user,
+      bookingId,
+      req.body
+    );
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: 'Booking Timeslot Updated',
+      data: result,
+    });
+  }
+);
 const updateBooking = catchAsync(async (req: Request, res: Response) => {
   const user = req.user as JwtPayload;
   const { id } = req.params;
@@ -54,7 +81,9 @@ const updateBooking = catchAsync(async (req: Request, res: Response) => {
 
 export const BookingController = {
   createBooking,
+  getAllBookings,
   getMyBookings,
   cancelBooking,
   updateBooking,
+  updateBookingTimeSlot,
 };

@@ -16,19 +16,31 @@ router.get(
   )
 );
 
+router.get(
+  '/all-bookings',
+  auth(ENUM_USER_ROLE.ADMIN),
+  BookingController.getAllBookings
+);
+
 router.post(
   '/create-booking',
   auth(ENUM_USER_ROLE.STUDENT, ENUM_USER_ROLE.GUARDIAN),
   BookingController.createBooking
 );
 router.patch(
+  '/update-timeSlot/:bookingId',
+  auth(ENUM_USER_ROLE.TEACHER, ENUM_USER_ROLE.ADMIN),
+  BookingController.updateBookingTimeSlot
+);
+
+router.patch(
   '/update-booking/:id',
-  auth(ENUM_USER_ROLE.TEACHER),
+  auth(ENUM_USER_ROLE.TEACHER, ENUM_USER_ROLE.ADMIN),
   BookingController.updateBooking
 );
 router.delete(
   '/delete-booking/:id',
-  auth(ENUM_USER_ROLE.STUDENT, ENUM_USER_ROLE.GUARDIAN),
+  auth(ENUM_USER_ROLE.STUDENT, ENUM_USER_ROLE.GUARDIAN, ENUM_USER_ROLE.ADMIN),
   BookingController.cancelBooking
 );
 

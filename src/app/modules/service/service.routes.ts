@@ -12,7 +12,7 @@ router.get('/', ServiceController.getAllServices);
 
 router.post(
   '/create-service',
-  auth(ENUM_USER_ROLE.TEACHER),
+  auth(ENUM_USER_ROLE.TEACHER, ENUM_USER_ROLE.ADMIN),
   validateRequest(ServiceValidation.createService),
   ServiceController.createService
 );
