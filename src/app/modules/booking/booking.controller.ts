@@ -15,6 +15,17 @@ const createBooking = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getMyBookings = catchAsync(async (req: Request, res: Response) => {
+  const { userId } = req.user as JwtPayload;
+  const result = await BookingService.getMyBookings(userId);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Booking fetched Successfully',
+    data: result,
+  });
+});
+
 const cancelBooking = catchAsync(async (req: Request, res: Response) => {
   const user = req.user as JwtPayload;
   const { id } = req.params;
@@ -43,6 +54,7 @@ const updateBooking = catchAsync(async (req: Request, res: Response) => {
 
 export const BookingController = {
   createBooking,
+  getMyBookings,
   cancelBooking,
   updateBooking,
 };
