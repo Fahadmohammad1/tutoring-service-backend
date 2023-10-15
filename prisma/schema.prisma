@@ -127,6 +127,13 @@ model Reviews {
   text      String  @default("")
 }
 
+model Blog {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  thumbnail   String[]
+}
+
 enum serviceType {
   remote
   onsite

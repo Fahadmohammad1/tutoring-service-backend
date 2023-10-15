@@ -4,14 +4,19 @@ import { BookingRoutes } from '../modules/booking/booking.routes';
 import { ProfileRoutes } from '../modules/profile/profile.routes';
 import { ReviewRoutes } from '../modules/review/review.routes';
 import { ServiceRoutes } from '../modules/service/service.routes';
+import { UserRoutes } from '../modules/user/user.routes';
 
 const router = express.Router();
 
 const moduleRoutes = [
   // ... routes
   {
-    path: '/users',
+    path: '/auth',
     routes: AuthRoutes,
+  },
+  {
+    path: '/users',
+    routes: UserRoutes,
   },
   {
     path: '/profile',
