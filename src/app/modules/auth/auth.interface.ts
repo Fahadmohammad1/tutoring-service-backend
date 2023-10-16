@@ -13,6 +13,10 @@ export type ILoginUser = {
   password: string;
 };
 
-export type IRefreshTokenResponse = {
-  accessToken: string;
+export type IAuthResponse = {
+  token: string;
+};
+
+export type IResetTokenResponse = {
+  token: string;
 };

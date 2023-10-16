@@ -6,9 +6,13 @@ import config from '../../../config';
 import ApiError from '../../../errors/ApiError';
 import { jwtHelpers } from '../../../helpers/jwtHelpers';
 import prisma from '../../../shared/prisma';
-import { ILoginUser, IRefreshTokenResponse, IUser } from './auth.interface';
+import {
+  IAuthResponse,
+  ILoginUser,
+  IResetTokenResponse,
+} from './auth.interface';
 
-const createUser = async (userData: User): Promise<IUser> => {
+const createUser = async (userData: User): Promise<IAuthResponse> => {
   const isUserExist = await prisma.user.findUnique({
     where: {
       email: userData.email,
@@ -28,13 +32,19 @@ const createUser = async (userData: User): Promise<IUser> => {
     data: userData,
   });
 
-  // eslint-disable-next-line no-unused-vars
-  const { password, ...result } = createdUser;
+  const { id: userId, email, role } = createdUser;
+  const token = jwtHelpers.createToken(
+    { userId, email, role },
+    config.jwt.secret as Secret,
+    config.jwt.expires_in as string
+  );
 
-  return result;
+  return {
+    token,
+  };
 };
 
-const loginUser = async (payload: ILoginUser) => {
+const loginUser = async (payload: ILoginUser): Promise<IAuthResponse> => {
   const isUserExist = await prisma.user.findUnique({
     where: {
       email: payload.email,
@@ -67,7 +77,7 @@ const loginUser = async (payload: ILoginUser) => {
   };
 };
 
-const resetToken = async (token: string): Promise<IRefreshTokenResponse> => {
+const resetToken = async (token: string): Promise<IResetTokenResponse> => {
   let verifiedToken = null;
   try {
     verifiedToken = jwtHelpers.verifyToken(token, config.jwt.secret as Secret);
@@ -99,7 +109,7 @@ const resetToken = async (token: string): Promise<IRefreshTokenResponse> => {
   );
 
   return {
-    accessToken: newAccessToken,
+    token: newAccessToken,
   };
 };
 

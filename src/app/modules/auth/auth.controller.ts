@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
-import { IRefreshTokenResponse } from './auth.interface';
+import { IResetTokenResponse } from './auth.interface';
 import { AuthService } from './auth.service';
 
 const createUser = catchAsync(async (req: Request, res: Response) => {
@@ -11,7 +11,7 @@ const createUser = catchAsync(async (req: Request, res: Response) => {
     success: true,
     statusCode: httpStatus.OK,
     message: 'User created successfully',
-    data: result,
+    token: result.token,
   });
 });
 
@@ -30,7 +30,7 @@ const resetToken = catchAsync(async (req: Request, res: Response) => {
 
   const result = await AuthService.resetToken(token as string);
 
-  sendResponse<IRefreshTokenResponse>(res, {
+  sendResponse<IResetTokenResponse>(res, {
     statusCode: 200,
     success: true,
     message: 'User logged in successfully !',
