@@ -1,7 +1,5 @@
 import { z } from 'zod';
 
-const roles = ['user', 'admin', 'student', 'teacher'];
-
 const create = z.object({
   body: z.object({
     firstName: z.string({
@@ -16,9 +14,6 @@ const create = z.object({
     }),
     password: z.string({
       required_error: 'Password is required',
-    }),
-    role: z.enum([...roles] as [string, ...string[]], {
-      required_error: 'Role is required',
     }),
   }),
 });
