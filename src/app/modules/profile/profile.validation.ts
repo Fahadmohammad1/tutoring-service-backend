@@ -19,7 +19,10 @@ const createStudentProfile = z.object({
       required_error: 'Institution Name is required',
     }),
     class: z.string({
-      required_error: 'Present Address is required',
+      required_error: 'Class is required',
+    }),
+    role: z.string({
+      required_error: 'Role is required',
     }),
   }),
 });
@@ -37,6 +40,9 @@ const createGuardianProfile = z.object({
     }),
     presentAddress: z.string({
       required_error: 'Present Address is required',
+    }),
+    role: z.string({
+      required_error: 'Role is required',
     }),
     avatar: z.string().optional(),
     occupation: z.string().optional(),
@@ -60,6 +66,9 @@ const createTeacherProfile = z.object({
     avatar: z.string().optional(),
     institutionName: z.string({
       required_error: 'Institution Name is required',
+    }),
+    role: z.string({
+      required_error: 'Role is required',
     }),
     designation: z.string().optional(),
     degree: z.string().optional(),

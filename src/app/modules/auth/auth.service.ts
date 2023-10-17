@@ -100,7 +100,7 @@ const resetToken = async (token: string): Promise<IResetTokenResponse> => {
 
   const newAccessToken = jwtHelpers.createToken(
     {
-      id: isUserExist.id,
+      userId: isUserExist.id,
       email: isUserExist.email,
       role: isUserExist.role,
     },

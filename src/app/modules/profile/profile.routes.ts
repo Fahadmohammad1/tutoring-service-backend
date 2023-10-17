@@ -19,24 +19,24 @@ router.get(
 );
 
 router.post(
-  '/create-studentProfile/:id',
+  '/create-studentProfile',
   auth(ENUM_USER_ROLE.USER),
   validateRequest(ProfileValidation.createStudentProfile),
-  ProfileController.createStudentProfile
+  ProfileController.createProfile
 );
 
 router.post(
-  '/create-guardianProfile/:id',
+  '/create-guardianProfile',
   auth(ENUM_USER_ROLE.USER),
   validateRequest(ProfileValidation.createGuardianProfile),
-  ProfileController.createGuardianProfile
+  ProfileController.createProfile
 );
 
 router.post(
-  '/create-teacherProfile/:id',
+  '/create-teacherProfile',
   auth(ENUM_USER_ROLE.USER),
   validateRequest(ProfileValidation.createTeacherProfile),
-  ProfileController.createTeacherProfile
+  ProfileController.createProfile
 );
 
 router.patch(

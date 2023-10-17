@@ -13,6 +13,6 @@ router.post(
 
 router.post('/signin', AuthController.loginUser);
 
-router.post('/refresh-token', AuthController.resetToken);
+router.post('/reset-token', AuthController.resetToken);
 
 export const AuthRoutes = router;

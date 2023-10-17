@@ -5,33 +5,9 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { ProfileService } from './profile.service';
 
-const createStudentProfile = catchAsync(async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const result = await ProfileService.createStudentProfile(req.body, id);
-  sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'Profile created successfully',
-    data: result,
-  });
-});
-
-const createGuardianProfile = catchAsync(
-  async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const result = await ProfileService.createGuardianProfile(req.body, id);
-    sendResponse(res, {
-      success: true,
-      statusCode: httpStatus.OK,
-      message: 'Profile created successfully',
-      data: result,
-    });
-  }
-);
-
-const createTeacherProfile = catchAsync(async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const result = await ProfileService.createTeacherProfile(req.body, id);
+const createProfile = catchAsync(async (req: Request, res: Response) => {
+  const { userId } = req.user as JwtPayload;
+  const result = await ProfileService.createProfile(req.body, userId);
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
@@ -63,9 +39,7 @@ const updateProfile = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const ProfileController = {
-  createStudentProfile,
-  createGuardianProfile,
-  createTeacherProfile,
+  createProfile,
   getSingleProfile,
   updateProfile,
 };
