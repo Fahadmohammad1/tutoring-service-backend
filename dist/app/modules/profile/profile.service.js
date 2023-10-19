@@ -54,7 +54,6 @@ const createProfile = (data, userId) => __awaiter(void 0, void 0, void 0, functi
     return result;
 });
 const getSingleProfile = (user) => __awaiter(void 0, void 0, void 0, function* () {
-
     const findUser = yield prisma_1.default.user.findUnique({
         where: {
             id: user.userId,

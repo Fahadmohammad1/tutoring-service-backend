@@ -42,7 +42,7 @@ const createService = (data, user) => __awaiter(void 0, void 0, void 0, function
             id: user.userId,
         },
         include: {
-            TeacherProfile: true,
+            Profile: true,
         },
     });
     if (!findAuthor) {
@@ -55,7 +55,7 @@ const createService = (data, user) => __awaiter(void 0, void 0, void 0, function
     });
     if (serviceData)
         serviceData.userId = user.userId;
-    serviceData.authorName = findAuthor === null || findAuthor === void 0 ? void 0 : findAuthor.TeacherProfile[0].fullName;
+    serviceData.authorName = findAuthor === null || findAuthor === void 0 ? void 0 : findAuthor.Profile[0].fullName;
     serviceData.authorEmail = findAuthor === null || findAuthor === void 0 ? void 0 : findAuthor.email;
     const result = yield prisma_1.default.service.create({
         data: serviceData,

@@ -55,6 +55,7 @@ model Service {
   location    String
   authorName  String
   authorEmail String
+  authorImage String
   description String
   category    String
   price       Float       @default(0)

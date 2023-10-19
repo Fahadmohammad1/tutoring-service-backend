@@ -46,6 +46,7 @@ const createService = async (
   if (serviceData) serviceData.userId = user.userId;
   serviceData.authorName = findAuthor?.Profile[0].fullName;
   serviceData.authorEmail = findAuthor?.email;
+  serviceData.authorImage = findAuthor.Profile[0].avatar;
 
   const result = await prisma.service.create({
     data: serviceData,

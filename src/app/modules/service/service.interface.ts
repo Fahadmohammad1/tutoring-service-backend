@@ -8,6 +8,7 @@ export type IService = {
   location: string;
   authorName: string;
   authorEmail: string;
+  authorImage: string;
   description: string;
   rating: string[];
   timeSlots: TimeSlots[];

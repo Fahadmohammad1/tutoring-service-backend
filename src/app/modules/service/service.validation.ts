@@ -4,7 +4,7 @@ import { serviceType } from './service.constants';
 const createService = z.object({
   body: z.object({
     name: z.string({
-      required_error: 'Title is required',
+      required_error: 'Name is required',
     }),
     thumbnail: z.string({
       required_error: 'Thumbnail image is required',

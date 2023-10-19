@@ -10,7 +10,7 @@ const app: Application = express();
 
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: process.env.FRONTEND_URL,
     credentials: true,
   })
 );
@@ -25,6 +25,10 @@ app.use('/api/v1', routes);
 
 //global error handler
 app.use(globalErrorHandler);
+
+app.use('/', (req, res) => {
+  res.send('Working fine');
+});
 
 //handle not found
 app.use((req: Request, res: Response, next: NextFunction) => {

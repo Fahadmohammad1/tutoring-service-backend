@@ -59,7 +59,6 @@ const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
 });
 const resetToken = (token) => __awaiter(void 0, void 0, void 0, function* () {
     let verifiedToken = null;
-
     try {
         verifiedToken = jwtHelpers_1.jwtHelpers.verifyToken(token, config_1.default.jwt.secret);
     }
