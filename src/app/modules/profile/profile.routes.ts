@@ -10,10 +10,12 @@ const router = express.Router();
 router.get(
   '/',
   auth(
+    ENUM_USER_ROLE.USER,
     ENUM_USER_ROLE.ADMIN,
     ENUM_USER_ROLE.SUPER_ADMIN,
     ENUM_USER_ROLE.STUDENT,
-    ENUM_USER_ROLE.TEACHER
+    ENUM_USER_ROLE.TEACHER,
+    ENUM_USER_ROLE.GUARDIAN
   ),
   ProfileController.getSingleProfile
 );
