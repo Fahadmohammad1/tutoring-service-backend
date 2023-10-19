@@ -43,7 +43,6 @@ const createProfile = async (
 };
 
 const getSingleProfile = async (user: JwtPayload): Promise<IUser | null> => {
-  console.log(user);
   const findUser = await prisma.user.findUnique({
     where: {
       id: user.userId,

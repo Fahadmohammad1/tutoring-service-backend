@@ -79,7 +79,7 @@ const loginUser = async (payload: ILoginUser): Promise<IAuthResponse> => {
 
 const resetToken = async (token: string): Promise<IResetTokenResponse> => {
   let verifiedToken = null;
-  console.log(token);
+
   try {
     verifiedToken = jwtHelpers.verifyToken(token, config.jwt.secret as Secret);
   } catch (err) {

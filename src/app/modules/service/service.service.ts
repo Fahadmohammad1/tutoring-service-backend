@@ -26,7 +26,7 @@ const createService = async (
       id: user.userId,
     },
     include: {
-      TeacherProfile: true,
+      Profile: true,
     },
   });
 
@@ -44,7 +44,7 @@ const createService = async (
   });
 
   if (serviceData) serviceData.userId = user.userId;
-  serviceData.authorName = findAuthor?.TeacherProfile[0].fullName;
+  serviceData.authorName = findAuthor?.Profile[0].fullName;
   serviceData.authorEmail = findAuthor?.email;
 
   const result = await prisma.service.create({
