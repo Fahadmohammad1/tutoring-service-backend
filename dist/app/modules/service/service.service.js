@@ -57,6 +57,7 @@ const createService = (data, user) => __awaiter(void 0, void 0, void 0, function
         serviceData.userId = user.userId;
     serviceData.authorName = findAuthor === null || findAuthor === void 0 ? void 0 : findAuthor.Profile[0].fullName;
     serviceData.authorEmail = findAuthor === null || findAuthor === void 0 ? void 0 : findAuthor.email;
+    serviceData.authorImage = findAuthor.Profile[0].avatar;
     const result = yield prisma_1.default.service.create({
         data: serviceData,
     });

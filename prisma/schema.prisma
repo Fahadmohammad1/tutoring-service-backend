@@ -69,6 +69,13 @@ model Service {
   Reviews     Reviews[]
 }
 
+model SaveForLater {
+  id        String @id @default(uuid())
+  serviceId String
+  userId    String
+  quantity  Int
+}
+
 model TimeSlots {
   id        String    @id @default(uuid())
   serviceId String

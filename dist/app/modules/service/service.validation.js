@@ -6,7 +6,7 @@ const service_constants_1 = require("./service.constants");
 const createService = zod_1.z.object({
     body: zod_1.z.object({
         name: zod_1.z.string({
-            required_error: 'Title is required',
+            required_error: 'Name is required',
         }),
         thumbnail: zod_1.z.string({
             required_error: 'Thumbnail image is required',

@@ -11,7 +11,7 @@ const routes_1 = __importDefault(require("./app/routes"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: 'http://localhost:3000',
+    origin: process.env.FRONTEND_URL,
     credentials: true,
 }));
 app.use((0, cookie_parser_1.default)());
@@ -21,6 +21,9 @@ app.use(express_1.default.urlencoded({ extended: true }));
 app.use('/api/v1', routes_1.default);
 //global error handler
 app.use(globalErrorHandler_1.default);
+app.use('/', (req, res) => {
+    res.send('Working fine');
+});
 //handle not found
 app.use((req, res, next) => {
     res.status(http_status_1.default.NOT_FOUND).json({
