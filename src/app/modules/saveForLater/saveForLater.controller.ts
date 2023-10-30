@@ -5,9 +5,10 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { SaveForLaterService } from './saveForLater.service';
 
-const addToSaveLater = catchAsync(async (req: Request, res: Response) => {
+const addToBookmark = catchAsync(async (req: Request, res: Response) => {
   const { userId } = req.user as JwtPayload;
-  const result = await SaveForLaterService.addToSaveLater(req.body, userId);
+
+  const result = await SaveForLaterService.addToBookmark(req.body, userId);
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
@@ -17,5 +18,5 @@ const addToSaveLater = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const SaveForLaterController = {
-  addToSaveLater,
+  addToBookmark,
 };

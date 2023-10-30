@@ -69,7 +69,7 @@ model Service {
   Reviews     Reviews[]
 }
 
-model SaveForLater {
+model Bookmark {
   id        String @id @default(uuid())
   serviceId String
   userId    String

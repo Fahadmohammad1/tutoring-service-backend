@@ -1,35 +1,36 @@
-import { SaveForLater } from '@prisma/client';
+import { Bookmark } from '@prisma/client';
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
 import prisma from '../../../shared/prisma';
 
-const addToSaveLater = async (
-  data: SaveForLater,
+const addToBookmark = async (
+  data: Bookmark,
   userId: string
-): Promise<SaveForLater | null> => {
+): Promise<Bookmark | null> => {
   data.userId = userId;
-  return await prisma.saveForLater.create({
+
+  return await prisma.bookmark.create({
     data,
   });
 };
 
-const getAllSaveLater = async (): Promise<SaveForLater[] | null> => {
-  return await prisma.saveForLater.findMany({});
+const getAllBookmark = async (): Promise<Bookmark[] | null> => {
+  return await prisma.bookmark.findMany({});
 };
 
-const getSingleSaveLater = async (id: string): Promise<SaveForLater | null> => {
-  return await prisma.saveForLater.findUnique({
+const getSingleBookmark = async (id: string): Promise<Bookmark | null> => {
+  return await prisma.bookmark.findUnique({
     where: {
       id,
     },
   });
 };
 
-const updateSaveLater = async (
+const updateBookmark = async (
   id: string,
   quantity: number
-): Promise<SaveForLater | null> => {
-  const findService = await prisma.saveForLater.findUnique({
+): Promise<Bookmark | null> => {
+  const findService = await prisma.bookmark.findUnique({
     where: {
       id,
     },
@@ -38,7 +39,7 @@ const updateSaveLater = async (
   if (!findService) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Service not available');
   }
-  return await prisma.saveForLater.update({
+  return await prisma.bookmark.update({
     where: {
       id,
     },
@@ -48,8 +49,8 @@ const updateSaveLater = async (
   });
 };
 
-const deleteSaveLater = async (id: string): Promise<SaveForLater | null> => {
-  return await prisma.saveForLater.delete({
+const deleteBookmark = async (id: string): Promise<Bookmark | null> => {
+  return await prisma.bookmark.delete({
     where: {
       id,
     },
@@ -57,9 +58,9 @@ const deleteSaveLater = async (id: string): Promise<SaveForLater | null> => {
 };
 
 export const SaveForLaterService = {
-  addToSaveLater,
-  getAllSaveLater,
-  getSingleSaveLater,
-  deleteSaveLater,
-  updateSaveLater,
+  addToBookmark,
+  getAllBookmark,
+  getSingleBookmark,
+  updateBookmark,
+  deleteBookmark,
 };
