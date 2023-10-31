@@ -81,7 +81,9 @@
 - /blog/update-blog (update)
 - /blog/delete-blog (delete)
 
-<div id="header" align="center">
+### ERD Diagram
+
+<div id="header">
     <img src="/ERD.png" width="400" alt="ERD Diagram"/>
 </div>
 
