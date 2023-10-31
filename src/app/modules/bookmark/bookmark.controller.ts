@@ -30,8 +30,9 @@ const getAllBookmark = catchAsync(async (req: Request, res: Response) => {
 
 const getSingleBookmark = catchAsync(async (req: Request, res: Response) => {
   const { userId } = req.user as JwtPayload;
+  const { id } = req.params;
 
-  const result = await BookmarkService.getSingleBookmark(userId);
+  const result = await BookmarkService.getSingleBookmark(userId, id);
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
@@ -42,7 +43,8 @@ const getSingleBookmark = catchAsync(async (req: Request, res: Response) => {
 
 const updateBookmark = catchAsync(async (req: Request, res: Response) => {
   const { userId } = req.user as JwtPayload;
-  const result = await BookmarkService.updateBookmark(userId, req.body);
+  const { id } = req.params;
+  const result = await BookmarkService.updateBookmark(userId, req.body, id);
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
@@ -53,7 +55,8 @@ const updateBookmark = catchAsync(async (req: Request, res: Response) => {
 
 const deleteBookmark = catchAsync(async (req: Request, res: Response) => {
   const { userId } = req.user as JwtPayload;
-  const result = await BookmarkService.deleteBookmark(userId);
+  const { id } = req.params;
+  const result = await BookmarkService.deleteBookmark(userId, id);
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,

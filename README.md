@@ -81,4 +81,8 @@
 - /blog/update-blog (update)
 - /blog/delete-blog (delete)
 
+<div id="header" align="center">
+    <img src="/ERD.png" width="400" alt="ERD Diagram"/>
+</div>
+
 [Postman API](https://documenter.getpostman.com/view/29775835/2s9YRB1X3j)

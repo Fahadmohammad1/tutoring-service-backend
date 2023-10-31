@@ -32,7 +32,10 @@ const getAllBookmark = async (id: string): Promise<Bookmark[] | null> => {
   });
 };
 
-const getSingleBookmark = async (id: string): Promise<Bookmark | null> => {
+const getSingleBookmark = async (
+  id: string,
+  itemId: string
+): Promise<Bookmark | null> => {
   const findItem = await prisma.bookmark.findFirst({
     where: {
       userId: id,
@@ -45,14 +48,15 @@ const getSingleBookmark = async (id: string): Promise<Bookmark | null> => {
 
   return await prisma.bookmark.findUnique({
     where: {
-      id,
+      id: itemId,
     },
   });
 };
 
 const updateBookmark = async (
   id: string,
-  quantity: number
+  quantity: number,
+  itemId: string
 ): Promise<Bookmark | null> => {
   const findService = await prisma.bookmark.findUnique({
     where: {
@@ -70,7 +74,7 @@ const updateBookmark = async (
 
   return await prisma.bookmark.update({
     where: {
-      id,
+      id: itemId,
     },
     data: {
       quantity: quantity,
@@ -78,7 +82,10 @@ const updateBookmark = async (
   });
 };
 
-const deleteBookmark = async (id: string): Promise<Bookmark | null> => {
+const deleteBookmark = async (
+  id: string,
+  itemId: string
+): Promise<Bookmark | null> => {
   const findItem = await prisma.bookmark.findFirst({
     where: {
       userId: id,
@@ -91,7 +98,7 @@ const deleteBookmark = async (id: string): Promise<Bookmark | null> => {
 
   return await prisma.bookmark.delete({
     where: {
-      id,
+      id: itemId,
     },
   });
 };
