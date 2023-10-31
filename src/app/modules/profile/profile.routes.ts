@@ -28,13 +28,6 @@ router.post(
 );
 
 router.post(
-  '/create-guardianProfile',
-  auth(ENUM_USER_ROLE.USER),
-  validateRequest(ProfileValidation.createGuardianProfile),
-  ProfileController.createProfile
-);
-
-router.post(
   '/create-teacherProfile',
   auth(ENUM_USER_ROLE.USER),
   validateRequest(ProfileValidation.createTeacherProfile),

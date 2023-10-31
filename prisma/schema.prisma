@@ -27,43 +27,43 @@ model User {
 }
 
 model Profile {
-  id                 String   @id() @default(uuid())
-  userId             String
-  user               User     @relation(fields: [userId], references: [id])
-  fullName           String
-  gender             String
-  contactNo          String
-  presentAddress     String
-  avatar             String
-  institutionName    String?
-  class              String?
-  designation        String?
-  degree             String?
-  experienceYear     String?  @default("0")
-  subjectOfExpertise String[] @default([""])
-  occupation         String?
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  id                String            @id() @default(uuid())
+  userId            String
+  user              User              @relation(fields: [userId], references: [id])
+  fullName          String
+  gender            String
+  contactNo         String
+  presentAddress    String
+  avatar            String
+  educationalStatus educationalStatus
+  institution       String
+  standard          String?
+  designation       String?
+  degree            String?
+  yearOfExperience  String?           @default("0")
+  topicOfExpertise  String[]          @default([""])
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
 }
 
 model Service {
-  id          String      @id @default(uuid())
+  id          String        @id @default(uuid())
   userId      String
-  user        User        @relation(fields: [userId], references: [id])
+  user        User          @relation(fields: [userId], references: [id])
   thumbnail   String
-  name        String
+  title       String
   location    String
   authorName  String
   authorEmail String
   authorImage String
   description String
   category    String
-  price       Float       @default(0)
-  duration    String
-  badge       String[]    @default([])
-  serviceType serviceType
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  fee         Float         @default(0)
+  badge       String[]      @default([])
+  type        serviceType
+  status      serviceStatus
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
   Booking     Booking[]
   TimeSlots   TimeSlots[]
   Reviews     Reviews[]
@@ -73,7 +73,7 @@ model Bookmark {
   id        String @id @default(uuid())
   serviceId String
   userId    String
-  quantity  Int
+  quantity  Int    @default(1)
 }
 
 model TimeSlots {
@@ -116,9 +116,20 @@ model Blog {
   updatedAt   DateTime @updatedAt
 }
 
+enum educationalStatus {
+  studying
+  graduated
+  dropout
+}
+
 enum serviceType {
-  remote
-  onsite
+  online
+  offline
+}
+
+enum serviceStatus {
+  upcoming
+  live
 }
 
 enum bookingStatus {

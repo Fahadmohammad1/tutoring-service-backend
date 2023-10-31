@@ -9,16 +9,40 @@ const addToBookmark = async (
 ): Promise<Bookmark | null> => {
   data.userId = userId;
 
+  const findItem = await prisma.bookmark.findFirst({
+    where: {
+      serviceId: data.serviceId,
+    },
+  });
+
+  if (findItem) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Already added');
+  }
+
   return await prisma.bookmark.create({
     data,
   });
 };
 
-const getAllBookmark = async (): Promise<Bookmark[] | null> => {
-  return await prisma.bookmark.findMany({});
+const getAllBookmark = async (id: string): Promise<Bookmark[] | null> => {
+  return await prisma.bookmark.findMany({
+    where: {
+      userId: id,
+    },
+  });
 };
 
 const getSingleBookmark = async (id: string): Promise<Bookmark | null> => {
+  const findItem = await prisma.bookmark.findFirst({
+    where: {
+      userId: id,
+    },
+  });
+
+  if (findItem?.userId !== id) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Unauthorized Access');
+  }
+
   return await prisma.bookmark.findUnique({
     where: {
       id,
@@ -39,6 +63,11 @@ const updateBookmark = async (
   if (!findService) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Service not available');
   }
+
+  if (findService?.userId !== id) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Unauthorized Access');
+  }
+
   return await prisma.bookmark.update({
     where: {
       id,
@@ -50,6 +79,16 @@ const updateBookmark = async (
 };
 
 const deleteBookmark = async (id: string): Promise<Bookmark | null> => {
+  const findItem = await prisma.bookmark.findFirst({
+    where: {
+      userId: id,
+    },
+  });
+
+  if (findItem?.userId !== id) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Unauthorized Access');
+  }
+
   return await prisma.bookmark.delete({
     where: {
       id,
@@ -57,7 +96,7 @@ const deleteBookmark = async (id: string): Promise<Bookmark | null> => {
   });
 };
 
-export const SaveForLaterService = {
+export const BookmarkService = {
   addToBookmark,
   getAllBookmark,
   getSingleBookmark,

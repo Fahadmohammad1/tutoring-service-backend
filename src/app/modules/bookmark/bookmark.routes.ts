@@ -1,7 +1,7 @@
 import express from 'express';
 import { ENUM_USER_ROLE } from '../../../enums/user';
 import auth from '../../middlewares/auth';
-import { SaveForLaterController } from './saveForLater.controller';
+import { BookmarkController } from './bookmark.controller';
 
 const router = express.Router();
 
@@ -15,7 +15,7 @@ router.post(
     ENUM_USER_ROLE.TEACHER,
     ENUM_USER_ROLE.GUARDIAN
   ),
-  SaveForLaterController.addToSaveLater
+  BookmarkController.addToBookmark
 );
 
-export const saveForLaterRoutes = router;
+export const BookmarkRoutes = router;

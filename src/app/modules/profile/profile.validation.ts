@@ -15,37 +15,15 @@ const createStudentProfile = z.object({
       required_error: 'Present Address is required',
     }),
     avatar: z.string().optional(),
-    institutionName: z.string({
+    institution: z.string({
       required_error: 'Institution Name is required',
     }),
-    class: z.string({
-      required_error: 'Class is required',
+    standard: z.string({
+      required_error: 'Class standard is required',
     }),
     role: z.string({
       required_error: 'Role is required',
     }),
-  }),
-});
-
-const createGuardianProfile = z.object({
-  body: z.object({
-    userId: z.string({
-      required_error: 'UserId is required',
-    }),
-    gender: z.string({
-      required_error: 'Gender is required',
-    }),
-    contactNo: z.string({
-      required_error: 'Contact Number is required',
-    }),
-    presentAddress: z.string({
-      required_error: 'Present Address is required',
-    }),
-    role: z.string({
-      required_error: 'Role is required',
-    }),
-    avatar: z.string().optional(),
-    occupation: z.string().optional(),
   }),
 });
 
@@ -64,7 +42,7 @@ const createTeacherProfile = z.object({
       required_error: 'Present Address is required',
     }),
     avatar: z.string().optional(),
-    institutionName: z.string({
+    institution: z.string({
       required_error: 'Institution Name is required',
     }),
     role: z.string({
@@ -72,10 +50,12 @@ const createTeacherProfile = z.object({
     }),
     designation: z.string().optional(),
     degree: z.string().optional(),
-    experienceYear: z.string({
-      required_error: 'Experience year is required',
-    }),
-    subjectOfExpertise: z.array(z.string()),
+    yearOfExperience: z.string().optional(),
+    topicOfExpertise: z.array(
+      z.string({
+        required_error: 'Expertise is required',
+      })
+    ),
   }),
 });
 
@@ -87,19 +67,18 @@ const updateProfile = z.object({
       contactNo: z.string().optional(),
       presentAddress: z.string().optional(),
       avatar: z.string().optional(),
-      institutionName: z.string().optional(),
-      class: z.string().optional(),
+      institution: z.string().optional(),
+      standard: z.string().optional(),
       designation: z.string().optional(),
       degree: z.string().optional(),
-      experienceYear: z.string().optional(),
-      subjectOfExpertise: z.array(z.string()).optional(),
+      yearOfExperience: z.string().optional(),
+      topicOfExpertise: z.array(z.string()).optional(),
     })
     .nonstrict(),
 });
 
 export const ProfileValidation = {
   createStudentProfile,
-  createGuardianProfile,
   createTeacherProfile,
   updateProfile,
 };
