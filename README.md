@@ -29,6 +29,9 @@
 
 ### API Endpoints
 
+**Base URL**
+https://tutoring-service-backend-eta.vercel.app
+
 **Auth**
 
 - /auth/signup (post)
@@ -56,7 +59,11 @@
 
 **Bookmark**
 
-- /bookmark/add
+- /bookmark/add (post)
+- /booking/ (get)
+- /booking (get)
+- /booking (update)
+- /booking (delete)
 
 **Booking**
 
