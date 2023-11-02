@@ -15,4 +15,4 @@ export const serviceSearchableFields: string[] = [
   'location',
 ];
 
-export const serviceType: string[] = ['remote', 'onsite'];
+export const serviceType: string[] = ['online', 'offline'];

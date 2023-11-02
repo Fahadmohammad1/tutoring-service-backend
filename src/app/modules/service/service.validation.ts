@@ -3,7 +3,7 @@ import { serviceType } from './service.constants';
 
 const createService = z.object({
   body: z.object({
-    name: z.string({
+    title: z.string({
       required_error: 'Name is required',
     }),
     thumbnail: z.string({
@@ -15,9 +15,6 @@ const createService = z.object({
     reviews: z.array(z.object({})).optional(),
     category: z.string({
       required_error: 'Category is required',
-    }),
-    duration: z.string({
-      required_error: 'Time is required',
     }),
     location: z.string({
       required_error: 'Location is required',
@@ -35,23 +32,22 @@ const createService = z.object({
       )
       .optional(),
 
-    serviceType: z.enum([...serviceType] as [string, ...string[]], {
+    type: z.enum([...serviceType] as [string, ...string[]], {
       required_error: 'Service type is required',
     }),
-    price: z.number().optional(),
+    fee: z.number().optional(),
   }),
 });
 
 const updateSerive = z.object({
   body: z.object({
-    name: z.string().optional(),
+    title: z.string().optional(),
     thumbnail: z.string().optional(),
     description: z.string().optional(),
     rating: z.array(z.string()).optional(),
     category: z.string().optional(),
-    time: z.string().optional(),
     location: z.string().optional(),
-    price: z.number().optional(),
+    fee: z.number().optional(),
   }),
 });
 

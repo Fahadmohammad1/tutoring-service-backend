@@ -1,10 +1,10 @@
-import { TimeSlots, serviceType } from '@prisma/client';
+import { TimeSlots, serviceStatus, serviceType } from '@prisma/client';
 
 export type IService = {
   id: string;
   userId: string;
   thumbnail: string;
-  name: string;
+  title: string;
   location: string;
   authorName: string;
   authorEmail: string;
@@ -13,15 +13,15 @@ export type IService = {
   rating: string[];
   timeSlots: TimeSlots[];
   category: string;
-  duration: string;
-  serviceType: serviceType;
-  price?: number;
+  type: serviceType;
+  fee?: number;
+  status: serviceStatus;
   badge?: string[];
 };
 
 export type IServiceFilter = {
   search?: string | undefined;
-  name?: string | undefined;
+  title?: string | undefined;
   authorName?: string | undefined;
   category?: string | undefined;
   location?: string | undefined;

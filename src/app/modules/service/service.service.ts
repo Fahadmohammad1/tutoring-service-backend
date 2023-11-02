@@ -16,7 +16,7 @@ const createService = async (
   const { timeSlots, ...serviceData } = data;
   const findService = await prisma.service.findMany({
     where: {
-      name: serviceData.name,
+      title: serviceData.title,
     },
   });
 
@@ -93,14 +93,14 @@ const getAllServices = async (
       AND: Object.entries(filterData).map(([field, value]) => {
         if (field === 'minPrice') {
           return {
-            price: {
+            fee: {
               gte: parseFloat(value as string),
             },
           };
         }
         if (field === 'maxPrice') {
           return {
-            price: {
+            fee: {
               lte: parseFloat(value as string),
             },
           };

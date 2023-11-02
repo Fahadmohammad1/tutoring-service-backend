@@ -30,6 +30,7 @@
 ### API Endpoints
 
 **Base URL**
+
 https://tutoring-service-backend-eta.vercel.app
 
 **Auth**
