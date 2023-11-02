@@ -1,6 +1,6 @@
 export const serviceFilterableFields: string[] = [
   'search',
-  'name',
+  'title',
   'authorName',
   'category',
   'location',
@@ -9,7 +9,7 @@ export const serviceFilterableFields: string[] = [
 ];
 
 export const serviceSearchableFields: string[] = [
-  'name',
+  'title',
   'authorName',
   'category',
   'location',
