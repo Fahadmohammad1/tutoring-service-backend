@@ -12,7 +12,7 @@ const addToBookmark = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: 'Added to save for later',
+    message: 'Added to bookmark',
     data: result,
   });
 });
@@ -20,10 +20,11 @@ const getAllBookmark = catchAsync(async (req: Request, res: Response) => {
   const { userId } = req.user as JwtPayload;
 
   const result = await BookmarkService.getAllBookmark(userId);
+  console.log(result);
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: 'Retrieved Successfully!',
+    message: 'Bookmarks retrieved Successfully!',
     data: result,
   });
 });
@@ -36,7 +37,7 @@ const getSingleBookmark = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: 'Retrieved Successfully!',
+    message: 'Bookmark retrieved Successfully!',
     data: result,
   });
 });
@@ -60,7 +61,7 @@ const deleteBookmark = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: 'Item deleted Successfully!',
+    message: 'Bookmark deleted Successfully!',
     data: result,
   });
 });

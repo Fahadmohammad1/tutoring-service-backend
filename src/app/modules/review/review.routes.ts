@@ -9,20 +9,20 @@ const router = express.Router();
 
 router.post(
   '/add-review',
-  auth(ENUM_USER_ROLE.STUDENT, ENUM_USER_ROLE.GUARDIAN),
+  auth(ENUM_USER_ROLE.STUDENT),
   validateRequest(ReviewValidation.addReview),
   ReviewController.addReview
 );
 
 router.patch(
   '/update-review/:id',
-  auth(ENUM_USER_ROLE.STUDENT, ENUM_USER_ROLE.GUARDIAN),
+  auth(ENUM_USER_ROLE.STUDENT),
   ReviewController.updateReview
 );
 
 router.delete(
   '/delete-review/:id',
-  auth(ENUM_USER_ROLE.STUDENT, ENUM_USER_ROLE.GUARDIAN),
+  auth(ENUM_USER_ROLE.STUDENT),
   ReviewController.deleteReview
 );
 

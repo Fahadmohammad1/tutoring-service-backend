@@ -9,5 +9,4 @@ var ENUM_USER_ROLE;
     ENUM_USER_ROLE["ADMIN"] = "admin";
     ENUM_USER_ROLE["STUDENT"] = "student";
     ENUM_USER_ROLE["TEACHER"] = "teacher";
-    ENUM_USER_ROLE["GUARDIAN"] = "parent";
 })(ENUM_USER_ROLE = exports.ENUM_USER_ROLE || (exports.ENUM_USER_ROLE = {}));

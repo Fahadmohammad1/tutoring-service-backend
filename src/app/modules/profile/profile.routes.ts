@@ -14,8 +14,7 @@ router.get(
     ENUM_USER_ROLE.ADMIN,
     ENUM_USER_ROLE.SUPER_ADMIN,
     ENUM_USER_ROLE.STUDENT,
-    ENUM_USER_ROLE.TEACHER,
-    ENUM_USER_ROLE.GUARDIAN
+    ENUM_USER_ROLE.TEACHER
   ),
   ProfileController.getSingleProfile
 );
@@ -36,7 +35,7 @@ router.post(
 
 router.patch(
   '/update-profile',
-  auth(ENUM_USER_ROLE.STUDENT, ENUM_USER_ROLE.TEACHER, ENUM_USER_ROLE.GUARDIAN),
+  auth(ENUM_USER_ROLE.STUDENT, ENUM_USER_ROLE.TEACHER),
   validateRequest(ProfileValidation.updateProfile),
   ProfileController.updateProfile
 );

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.serviceType = exports.serviceSearchableFields = exports.serviceFilterableFields = void 0;
 exports.serviceFilterableFields = [
     'search',
-    'name',
+    'title',
     'authorName',
     'category',
     'location',
@@ -11,9 +11,9 @@ exports.serviceFilterableFields = [
     'maxPrice',
 ];
 exports.serviceSearchableFields = [
-    'name',
+    'title',
     'authorName',
     'category',
     'location',
 ];
-exports.serviceType = ['remote', 'onsite'];
+exports.serviceType = ['online', 'offline'];

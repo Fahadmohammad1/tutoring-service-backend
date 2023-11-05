@@ -1,3 +1,5 @@
+import { educationalStatus } from '@prisma/client';
+
 export type IProfile = {
   id: string;
   userId: string;
@@ -7,11 +9,11 @@ export type IProfile = {
   contactNo: string;
   presentAddress: string;
   avatar: string;
-  institutionName?: string;
-  class?: string;
+  institution: string;
+  stanadard?: string;
   designation?: string;
-  degreee?: string;
-  experienceYear?: string;
-  SubjectOfExpertise?: string[];
-  occupation?: string;
+  degree?: string;
+  educationalStatus: educationalStatus;
+  yearOfExperience?: string;
+  topicOfExpertise?: string[];
 };

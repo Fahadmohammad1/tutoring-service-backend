@@ -11,7 +11,6 @@ router.get(
     ENUM_USER_ROLE.ADMIN,
     ENUM_USER_ROLE.STUDENT,
     ENUM_USER_ROLE.TEACHER,
-    ENUM_USER_ROLE.GUARDIAN,
     ENUM_USER_ROLE.SUPER_ADMIN
   )
 );
@@ -24,7 +23,7 @@ router.get(
 
 router.post(
   '/create-booking',
-  auth(ENUM_USER_ROLE.STUDENT, ENUM_USER_ROLE.GUARDIAN),
+  auth(ENUM_USER_ROLE.STUDENT),
   BookingController.createBooking
 );
 router.patch(
@@ -40,7 +39,7 @@ router.patch(
 );
 router.delete(
   '/delete-booking/:id',
-  auth(ENUM_USER_ROLE.STUDENT, ENUM_USER_ROLE.GUARDIAN, ENUM_USER_ROLE.ADMIN),
+  auth(ENUM_USER_ROLE.STUDENT, ENUM_USER_ROLE.ADMIN),
   BookingController.cancelBooking
 );
 

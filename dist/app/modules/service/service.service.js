@@ -33,7 +33,7 @@ const createService = (data, user) => __awaiter(void 0, void 0, void 0, function
     const { timeSlots } = data, serviceData = __rest(data, ["timeSlots"]);
     const findService = yield prisma_1.default.service.findMany({
         where: {
-            name: serviceData.name,
+            title: serviceData.title,
         },
     });
     //finding author by id using token
@@ -94,14 +94,14 @@ const getAllServices = (filters, options) => __awaiter(void 0, void 0, void 0, f
             AND: Object.entries(filterData).map(([field, value]) => {
                 if (field === 'minPrice') {
                     return {
-                        price: {
+                        fee: {
                             gte: parseFloat(value),
                         },
                     };
                 }
                 if (field === 'maxPrice') {
                     return {
-                        price: {
+                        fee: {
                             lte: parseFloat(value),
                         },
                     };

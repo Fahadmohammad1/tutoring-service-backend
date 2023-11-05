@@ -11,7 +11,7 @@ const validateRequest_1 = __importDefault(require("../../middlewares/validateReq
 const review_controller_1 = require("./review.controller");
 const review_validation_1 = require("./review.validation");
 const router = express_1.default.Router();
-router.post('/add-review', (0, auth_1.default)(user_1.ENUM_USER_ROLE.STUDENT, user_1.ENUM_USER_ROLE.GUARDIAN), (0, validateRequest_1.default)(review_validation_1.ReviewValidation.addReview), review_controller_1.ReviewController.addReview);
-router.patch('/update-review/:id', (0, auth_1.default)(user_1.ENUM_USER_ROLE.STUDENT, user_1.ENUM_USER_ROLE.GUARDIAN), review_controller_1.ReviewController.updateReview);
-router.delete('/delete-review/:id', (0, auth_1.default)(user_1.ENUM_USER_ROLE.STUDENT, user_1.ENUM_USER_ROLE.GUARDIAN), review_controller_1.ReviewController.deleteReview);
+router.post('/add-review', (0, auth_1.default)(user_1.ENUM_USER_ROLE.STUDENT), (0, validateRequest_1.default)(review_validation_1.ReviewValidation.addReview), review_controller_1.ReviewController.addReview);
+router.patch('/update-review/:id', (0, auth_1.default)(user_1.ENUM_USER_ROLE.STUDENT), review_controller_1.ReviewController.updateReview);
+router.delete('/delete-review/:id', (0, auth_1.default)(user_1.ENUM_USER_ROLE.STUDENT), review_controller_1.ReviewController.deleteReview);
 exports.ReviewRoutes = router;
