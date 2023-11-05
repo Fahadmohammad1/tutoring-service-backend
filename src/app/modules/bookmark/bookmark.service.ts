@@ -15,7 +15,7 @@ const addToBookmark = async (
     },
   });
 
-  if (findItem) {
+  if (findItem?.userId === userId && findItem?.serviceId === data.serviceId) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Already added');
   }
 
@@ -28,6 +28,9 @@ const getAllBookmark = async (id: string): Promise<Bookmark[] | null> => {
   return await prisma.bookmark.findMany({
     where: {
       userId: id,
+    },
+    include: {
+      service: true,
     },
   });
 };

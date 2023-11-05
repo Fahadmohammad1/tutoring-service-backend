@@ -49,6 +49,8 @@ const getSingleProfile = async (user: JwtPayload): Promise<IUser | null> => {
     },
     include: {
       Profile: true,
+      Booking: true,
+      Bookmark: true,
     },
   });
 
