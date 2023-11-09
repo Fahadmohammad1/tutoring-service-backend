@@ -68,6 +68,23 @@ const createService = async (
   return result;
 };
 
+const myServices = async (user: JwtPayload): Promise<Service[] | null> => {
+  const result = await prisma.service.findMany({
+    where: {
+      userId: user.userId,
+    },
+    include: {
+      TimeSlots: true,
+      Booking: true,
+      Bookmark: true,
+      Reviews: true,
+      user: true,
+    },
+  });
+
+  return result;
+};
+
 const getAllServices = async (
   filters: IServiceFilter,
   options: IPaginationOptions
@@ -117,6 +134,13 @@ const getAllServices = async (
 
   const result = await prisma.service.findMany({
     where: whereConditions,
+    include: {
+      TimeSlots: true,
+      Booking: true,
+      Bookmark: true,
+      Reviews: true,
+      user: true,
+    },
     skip,
     take: limit,
     orderBy:
@@ -144,6 +168,13 @@ const getSingleService = async (id: string): Promise<Service | null> => {
   const result = await prisma.service.findUnique({
     where: {
       id,
+    },
+    include: {
+      TimeSlots: true,
+      Booking: true,
+      Bookmark: true,
+      Reviews: true,
+      user: true,
     },
   });
   return result;
@@ -207,4 +238,5 @@ export const ServicesOfService = {
   getSingleService,
   updateService,
   deleteService,
+  myServices,
 };

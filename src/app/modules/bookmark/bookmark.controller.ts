@@ -20,7 +20,7 @@ const getAllBookmark = catchAsync(async (req: Request, res: Response) => {
   const { userId } = req.user as JwtPayload;
 
   const result = await BookmarkService.getAllBookmark(userId);
-  console.log(result);
+
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,

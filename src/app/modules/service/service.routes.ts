@@ -7,7 +7,13 @@ import { ServiceValidation } from './service.validation';
 
 const router = express.Router();
 
+router.get(
+  '/my-services',
+  auth(ENUM_USER_ROLE.TEACHER),
+  ServiceController.myServices
+);
 router.get('/:id', ServiceController.getSingleService);
+
 router.get('/', ServiceController.getAllServices);
 
 router.post(

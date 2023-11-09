@@ -18,6 +18,18 @@ const createService = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const myServices = catchAsync(async (req: Request, res: Response) => {
+  const user = req.user as JwtPayload;
+
+  const result = await ServicesOfService.myServices(user);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Services retrieved successfully',
+    data: result,
+  });
+});
+
 const getAllServices = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, serviceFilterableFields);
   const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
@@ -72,4 +84,5 @@ export const ServiceController = {
   getSingleService,
   updateService,
   deleteService,
+  myServices,
 };
