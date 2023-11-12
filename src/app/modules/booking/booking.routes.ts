@@ -6,13 +6,14 @@ import { BookingController } from './booking.controller';
 const router = express.Router();
 
 router.get(
-  '/',
+  '/my-bookings',
   auth(
     ENUM_USER_ROLE.ADMIN,
     ENUM_USER_ROLE.STUDENT,
     ENUM_USER_ROLE.TEACHER,
     ENUM_USER_ROLE.SUPER_ADMIN
-  )
+  ),
+  BookingController.getMyBookings
 );
 
 router.get(

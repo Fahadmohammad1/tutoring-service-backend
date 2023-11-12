@@ -23,7 +23,9 @@ const createBooking = async (bookingData: Booking): Promise<Booking | null> => {
 const getAllBookings = async () => {
   return await prisma.booking.findMany({});
 };
+
 const getMyBookings = async (userId: string) => {
+  console.log(userId);
   const findUser = await prisma.user.findUnique({
     where: {
       id: userId,
