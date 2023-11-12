@@ -32,23 +32,23 @@ model User {
 }
 
 model Profile {
-  id                String            @id() @default(uuid())
+  id                String             @id() @default(uuid())
   userId            String
-  user              User              @relation(fields: [userId], references: [id])
+  user              User               @relation(fields: [userId], references: [id])
   fullName          String
   gender            String
   contactNo         String
   presentAddress    String
   avatar            String
-  educationalStatus educationalStatus
+  educationalStatus educationalStatus?
   institution       String
   standard          String?
   designation       String?
   degree            String?
-  yearOfExperience  String?           @default("0")
-  topicOfExpertise  String[]          @default([""])
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
+  yearOfExperience  String?            @default("0")
+  topicOfExpertise  String[]           @default([""])
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
 }
 
 model Service {
