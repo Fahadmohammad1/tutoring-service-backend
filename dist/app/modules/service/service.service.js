@@ -75,6 +75,21 @@ const createService = (data, user) => __awaiter(void 0, void 0, void 0, function
     }
     return result;
 });
+const myServices = (user) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield prisma_1.default.service.findMany({
+        where: {
+            userId: user.userId,
+        },
+        include: {
+            TimeSlots: true,
+            Booking: true,
+            Bookmark: true,
+            Reviews: true,
+            user: true,
+        },
+    });
+    return result;
+});
 const getAllServices = (filters, options) => __awaiter(void 0, void 0, void 0, function* () {
     const { limit, page, skip } = paginationHelper_1.paginationHelpers.calculatePagination(options);
     const { search } = filters, filterData = __rest(filters, ["search"]);
@@ -115,6 +130,13 @@ const getAllServices = (filters, options) => __awaiter(void 0, void 0, void 0, f
     const whereConditions = andConditions.length > 0 ? { AND: andConditions } : {};
     const result = yield prisma_1.default.service.findMany({
         where: whereConditions,
+        include: {
+            TimeSlots: true,
+            Booking: true,
+            Bookmark: true,
+            Reviews: true,
+            user: true,
+        },
         skip,
         take: limit,
         orderBy: options.sortBy && options.sortOrder
@@ -139,6 +161,13 @@ const getSingleService = (id) => __awaiter(void 0, void 0, void 0, function* () 
     const result = yield prisma_1.default.service.findUnique({
         where: {
             id,
+        },
+        include: {
+            TimeSlots: true,
+            Booking: true,
+            Bookmark: true,
+            Reviews: true,
+            user: true,
         },
     });
     return result;
@@ -184,4 +213,5 @@ exports.ServicesOfService = {
     getSingleService,
     updateService,
     deleteService,
+    myServices,
 };

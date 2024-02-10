@@ -21,11 +21,17 @@ const createBooking = async (bookingData: Booking): Promise<Booking | null> => {
 };
 
 const getAllBookings = async () => {
-  return await prisma.booking.findMany({});
+  return await prisma.booking.findMany({
+    include: {
+      user: true,
+      service: true,
+      timeSlots: true,
+    },
+  });
 };
 
 const getMyBookings = async (userId: string) => {
-  console.log(userId);
+  // console.log(userId);
   const findUser = await prisma.user.findUnique({
     where: {
       id: userId,
@@ -36,11 +42,31 @@ const getMyBookings = async (userId: string) => {
     throw new ApiError(httpStatus.BAD_REQUEST, 'User does not exist');
   }
 
-  return await prisma.booking.findMany({
-    where: {
-      userId: userId,
-    },
-  });
+  if (findUser.role === 'student') {
+    return await prisma.booking.findMany({
+      where: {
+        userId: userId,
+      },
+      include: {
+        user: true,
+        service: true,
+        timeSlots: true,
+      },
+    });
+  } else {
+    return await prisma.booking.findMany({
+      where: {
+        service: {
+          userId,
+        },
+      },
+      include: {
+        user: true,
+        service: true,
+        timeSlots: true,
+      },
+    });
+  }
 };
 
 const cancelBooking = async (

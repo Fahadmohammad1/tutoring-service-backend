@@ -23,7 +23,7 @@ const addToBookmark = (data, userId) => __awaiter(void 0, void 0, void 0, functi
             serviceId: data.serviceId,
         },
     });
-    if (findItem) {
+    if ((findItem === null || findItem === void 0 ? void 0 : findItem.userId) === userId && (findItem === null || findItem === void 0 ? void 0 : findItem.serviceId) === data.serviceId) {
         throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, 'Already added');
     }
     return yield prisma_1.default.bookmark.create({
@@ -34,6 +34,9 @@ const getAllBookmark = (id) => __awaiter(void 0, void 0, void 0, function* () {
     return yield prisma_1.default.bookmark.findMany({
         where: {
             userId: id,
+        },
+        include: {
+            service: true,
         },
     });
 });

@@ -29,6 +29,16 @@ const createService = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
         data: result,
     });
 }));
+const myServices = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = req.user;
+    const result = yield service_service_1.ServicesOfService.myServices(user);
+    (0, sendResponse_1.default)(res, {
+        success: true,
+        statusCode: http_status_1.default.OK,
+        message: 'Services retrieved successfully',
+        data: result,
+    });
+}));
 const getAllServices = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const filters = (0, pick_1.default)(req.query, service_constants_1.serviceFilterableFields);
     const options = (0, pick_1.default)(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
@@ -78,4 +88,5 @@ exports.ServiceController = {
     getSingleService,
     updateService,
     deleteService,
+    myServices,
 };

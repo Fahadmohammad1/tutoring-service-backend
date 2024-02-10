@@ -23,7 +23,7 @@ const addToBookmark = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
     (0, sendResponse_1.default)(res, {
         success: true,
         statusCode: http_status_1.default.OK,
-        message: 'Added to save for later',
+        message: 'Added to bookmark',
         data: result,
     });
 }));
@@ -33,7 +33,7 @@ const getAllBookmark = (0, catchAsync_1.default)((req, res) => __awaiter(void 0,
     (0, sendResponse_1.default)(res, {
         success: true,
         statusCode: http_status_1.default.OK,
-        message: 'Retrieved Successfully!',
+        message: 'Bookmarks retrieved Successfully!',
         data: result,
     });
 }));
@@ -44,7 +44,7 @@ const getSingleBookmark = (0, catchAsync_1.default)((req, res) => __awaiter(void
     (0, sendResponse_1.default)(res, {
         success: true,
         statusCode: http_status_1.default.OK,
-        message: 'Retrieved Successfully!',
+        message: 'Bookmark retrieved Successfully!',
         data: result,
     });
 }));
@@ -66,7 +66,7 @@ const deleteBookmark = (0, catchAsync_1.default)((req, res) => __awaiter(void 0,
     (0, sendResponse_1.default)(res, {
         success: true,
         statusCode: http_status_1.default.OK,
-        message: 'Item deleted Successfully!',
+        message: 'Bookmark deleted Successfully!',
         data: result,
     });
 }));

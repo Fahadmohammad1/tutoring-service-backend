@@ -60,6 +60,8 @@ const getSingleProfile = (user) => __awaiter(void 0, void 0, void 0, function* (
         },
         include: {
             Profile: true,
+            Booking: true,
+            Bookmark: true,
         },
     });
     if (!findUser) {

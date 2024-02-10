@@ -30,9 +30,16 @@ const createBooking = (bookingData) => __awaiter(void 0, void 0, void 0, functio
     });
 });
 const getAllBookings = () => __awaiter(void 0, void 0, void 0, function* () {
-    return yield prisma_1.default.booking.findMany({});
+    return yield prisma_1.default.booking.findMany({
+        include: {
+            user: true,
+            service: true,
+            timeSlots: true,
+        },
+    });
 });
 const getMyBookings = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(userId);
     const findUser = yield prisma_1.default.user.findUnique({
         where: {
             id: userId,
@@ -44,6 +51,11 @@ const getMyBookings = (userId) => __awaiter(void 0, void 0, void 0, function* ()
     return yield prisma_1.default.booking.findMany({
         where: {
             userId: userId,
+        },
+        include: {
+            user: true,
+            service: true,
+            timeSlots: true,
         },
     });
 });
