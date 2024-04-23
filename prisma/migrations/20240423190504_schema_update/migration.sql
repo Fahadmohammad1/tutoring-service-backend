@@ -2,10 +2,7 @@
 CREATE TYPE "educationalStatus" AS ENUM ('studying', 'graduated', 'dropout');
 
 -- CreateEnum
-CREATE TYPE "serviceType" AS ENUM ('online', 'offline');
-
--- CreateEnum
-CREATE TYPE "serviceStatus" AS ENUM ('upcoming', 'live');
+CREATE TYPE "serviceType" AS ENUM ('pre_recorded', 'live');
 
 -- CreateEnum
 CREATE TYPE "bookingStatus" AS ENUM ('pending', 'cancelled', 'booked', 'completed');
@@ -14,7 +11,6 @@ CREATE TYPE "bookingStatus" AS ENUM ('pending', 'cancelled', 'booked', 'complete
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "firstName" TEXT NOT NULL,
-    "middleName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
@@ -34,7 +30,7 @@ CREATE TABLE "Profile" (
     "contactNo" TEXT NOT NULL,
     "presentAddress" TEXT NOT NULL,
     "avatar" TEXT NOT NULL,
-    "educationalStatus" "educationalStatus" NOT NULL,
+    "educationalStatus" "educationalStatus",
     "institution" TEXT NOT NULL,
     "standard" TEXT,
     "designation" TEXT,
@@ -61,8 +57,7 @@ CREATE TABLE "Service" (
     "category" TEXT NOT NULL,
     "fee" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "badge" TEXT[] DEFAULT ARRAY[]::TEXT[],
-    "type" "serviceType" NOT NULL,
-    "status" "serviceStatus" NOT NULL,
+    "lessonType" "serviceType" NOT NULL DEFAULT 'pre_recorded',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -132,6 +127,12 @@ ALTER TABLE "Profile" ADD CONSTRAINT "Profile_userId_fkey" FOREIGN KEY ("userId"
 
 -- AddForeignKey
 ALTER TABLE "Service" ADD CONSTRAINT "Service_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Bookmark" ADD CONSTRAINT "Bookmark_serviceId_fkey" FOREIGN KEY ("serviceId") REFERENCES "Service"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Bookmark" ADD CONSTRAINT "Bookmark_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "TimeSlots" ADD CONSTRAINT "TimeSlots_serviceId_fkey" FOREIGN KEY ("serviceId") REFERENCES "Service"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

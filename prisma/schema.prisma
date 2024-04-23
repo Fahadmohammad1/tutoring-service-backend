@@ -64,7 +64,7 @@ model Service {
   category    String
   fee         Float       @default(0)
   badge       String[]    @default([])
-  lessonType  serviceType
+  lessonType  serviceType @default(pre_recorded)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   Booking     Booking[]
