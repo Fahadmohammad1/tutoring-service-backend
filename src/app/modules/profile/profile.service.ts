@@ -21,10 +21,10 @@ const createProfile = async (
     throw new ApiError(httpStatus.BAD_REQUEST, 'User does not exist');
   }
 
-  const { firstName, middleName, lastName } = findUser;
+  const { firstName, lastName } = findUser;
 
   // setting user fullname for profile
-  profileData.fullName = firstName + ' ' + middleName + ' ' + lastName;
+  profileData.fullName = firstName + ' ' + lastName;
 
   const result = await prisma.profile.create({
     data: profileData,
