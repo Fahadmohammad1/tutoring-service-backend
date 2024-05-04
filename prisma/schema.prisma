@@ -56,7 +56,7 @@ model Service {
   user        User        @relation(fields: [userId], references: [id])
   thumbnail   String
   title       String
-  location    String
+  language    String
   authorName  String
   authorEmail String
   authorImage String

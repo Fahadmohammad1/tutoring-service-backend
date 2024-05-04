@@ -3,7 +3,6 @@ export const serviceFilterableFields: string[] = [
   'title',
   'authorName',
   'category',
-  'location',
   'minPrice',
   'maxPrice',
 ];
@@ -12,7 +11,6 @@ export const serviceSearchableFields: string[] = [
   'title',
   'authorName',
   'category',
-  'location',
 ];
 
-export const serviceType: string[] = ['online', 'offline'];
+export const serviceType: string[] = ['pre_recorded', 'live'];
