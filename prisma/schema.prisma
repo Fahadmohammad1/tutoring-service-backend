@@ -64,11 +64,11 @@ model Service {
   category    String
   fee         Float       @default(0)
   badge       String[]    @default([])
+  schedule    String?
   lessonType  serviceType @default(pre_recorded)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   Booking     Booking[]
-  TimeSlots   TimeSlots[]
   Reviews     Reviews[]
   Bookmark    Bookmark[]
 }
@@ -82,25 +82,13 @@ model Bookmark {
   quantity  Int     @default(1)
 }
 
-model TimeSlots {
-  id        String    @id @default(uuid())
-  serviceId String
-  service   Service   @relation(fields: [serviceId], references: [id])
-  date      String
-  startTime String
-  endTime   String
-  Booking   Booking[]
-}
-
 model Booking {
-  id         String        @id @default(uuid())
-  status     bookingStatus @default(pending)
-  userId     String
-  user       User          @relation(fields: [userId], references: [id])
-  serviceId  String
-  service    Service       @relation(fields: [serviceId], references: [id])
-  timeSlotId String
-  timeSlots  TimeSlots     @relation(fields: [timeSlotId], references: [id])
+  id        String        @id @default(uuid())
+  status    bookingStatus @default(pending)
+  userId    String
+  user      User          @relation(fields: [userId], references: [id])
+  serviceId String
+  service   Service       @relation(fields: [serviceId], references: [id])
 }
 
 model Reviews {
