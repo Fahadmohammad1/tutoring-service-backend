@@ -1,4 +1,4 @@
-import { TimeSlots, serviceStatus, serviceType } from '@prisma/client';
+import { serviceType } from '@prisma/client';
 
 export type IService = {
   id: string;
@@ -11,12 +11,12 @@ export type IService = {
   authorImage: string;
   description: string;
   rating: string[];
-  timeSlots: TimeSlots[];
+  schedule: string;
   category: string;
-  type: serviceType;
+  lessonType: serviceType;
   fee?: number;
-  status: serviceStatus;
   badge?: string[];
+  language: string;
 };
 
 export type IServiceFilter = {

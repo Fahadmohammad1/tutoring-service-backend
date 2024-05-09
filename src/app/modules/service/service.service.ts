@@ -10,10 +10,9 @@ import { serviceSearchableFields } from './service.constants';
 import { IService, IServiceFilter } from './service.interface';
 
 const createService = async (
-  data: IService,
+  serviceData: IService,
   user: JwtPayload
 ): Promise<Service | null> => {
-  const { timeSlots, ...serviceData } = data;
   const findService = await prisma.service.findMany({
     where: {
       title: serviceData.title,
@@ -52,19 +51,6 @@ const createService = async (
     data: serviceData,
   });
 
-  if (timeSlots) {
-    timeSlots.map(async slot => {
-      await prisma.timeSlots.create({
-        data: {
-          serviceId: result.id,
-          date: slot.date,
-          startTime: slot.startTime,
-          endTime: slot.endTime,
-        },
-      });
-    });
-  }
-
   return result;
 };
 
@@ -74,7 +60,6 @@ const myServices = async (user: JwtPayload): Promise<Service[] | null> => {
       userId: user.userId,
     },
     include: {
-      TimeSlots: true,
       Booking: true,
       Bookmark: true,
       Reviews: true,
@@ -135,7 +120,6 @@ const getAllServices = async (
   const result = await prisma.service.findMany({
     where: whereConditions,
     include: {
-      TimeSlots: true,
       Booking: true,
       Bookmark: true,
       Reviews: true,
@@ -170,7 +154,6 @@ const getSingleService = async (id: string): Promise<Service | null> => {
       id,
     },
     include: {
-      TimeSlots: true,
       Booking: true,
       Bookmark: true,
       Reviews: true,
