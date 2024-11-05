@@ -49,7 +49,7 @@ CREATE TABLE "Service" (
     "userId" TEXT NOT NULL,
     "thumbnail" TEXT NOT NULL,
     "title" TEXT NOT NULL,
-    "location" TEXT NOT NULL,
+    "language" TEXT NOT NULL,
     "authorName" TEXT NOT NULL,
     "authorEmail" TEXT NOT NULL,
     "authorImage" TEXT NOT NULL,
@@ -57,6 +57,7 @@ CREATE TABLE "Service" (
     "category" TEXT NOT NULL,
     "fee" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "badge" TEXT[] DEFAULT ARRAY[]::TEXT[],
+    "schedule" TEXT,
     "lessonType" "serviceType" NOT NULL DEFAULT 'pre_recorded',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -75,23 +76,11 @@ CREATE TABLE "Bookmark" (
 );
 
 -- CreateTable
-CREATE TABLE "TimeSlots" (
-    "id" TEXT NOT NULL,
-    "serviceId" TEXT NOT NULL,
-    "date" TEXT NOT NULL,
-    "startTime" TEXT NOT NULL,
-    "endTime" TEXT NOT NULL,
-
-    CONSTRAINT "TimeSlots_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "Booking" (
     "id" TEXT NOT NULL,
     "status" "bookingStatus" NOT NULL DEFAULT 'pending',
     "userId" TEXT NOT NULL,
     "serviceId" TEXT NOT NULL,
-    "timeSlotId" TEXT NOT NULL,
 
     CONSTRAINT "Booking_pkey" PRIMARY KEY ("id")
 );
@@ -135,16 +124,10 @@ ALTER TABLE "Bookmark" ADD CONSTRAINT "Bookmark_serviceId_fkey" FOREIGN KEY ("se
 ALTER TABLE "Bookmark" ADD CONSTRAINT "Bookmark_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "TimeSlots" ADD CONSTRAINT "TimeSlots_serviceId_fkey" FOREIGN KEY ("serviceId") REFERENCES "Service"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "Booking" ADD CONSTRAINT "Booking_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Booking" ADD CONSTRAINT "Booking_serviceId_fkey" FOREIGN KEY ("serviceId") REFERENCES "Service"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Booking" ADD CONSTRAINT "Booking_timeSlotId_fkey" FOREIGN KEY ("timeSlotId") REFERENCES "TimeSlots"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Reviews" ADD CONSTRAINT "Reviews_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
